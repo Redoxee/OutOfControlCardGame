@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public partial class GameController : MonoBehaviour
 {
@@ -21,6 +22,16 @@ public partial class GameController : MonoBehaviour
 
     private List<RuleData> availableRules = new List<RuleData>();
 
+    [SerializeField]
+    private int startingLives = 4;
+    private int lifeCount = 4;
+    private int score = 0;
+    [SerializeField]
+    private TextMeshPro scoreLabel = null;
+    [SerializeField]
+    private TextMeshPro lifeLabel = null;
+
+
     private void Start()
     {
         this.Bind();
@@ -37,6 +48,9 @@ public partial class GameController : MonoBehaviour
         this.DrawRuleForSlot(2);
 
         this.currentState = State.CardRuleChoice;
+
+        this.score = 0;
+        this.lifeCount = this.startingLives;
     }
 
     [SerializeField]
@@ -83,7 +97,7 @@ public partial class GameController : MonoBehaviour
     {
         CardData cData = this.DrawCard();
 
-        GameObject cardObject = Instantiate(this.cardPrefab);
+        GameObject cardObject = Instantiate(this.cardPrefab, this.transform);
         Card card = cardObject.GetComponent<Card>();
         Debug.Assert(card != null);
         card.SetCard(cData);
@@ -108,7 +122,7 @@ public partial class GameController : MonoBehaviour
     private void DrawRuleForSlot(int slotIndex)
     {
         RuleData rData = this.DrawRule();
-        GameObject ruleObject = Instantiate(this.rulePrefab);
+        GameObject ruleObject = Instantiate(this.rulePrefab, this.transform);
         Rule rule = ruleObject.GetComponent<Rule>();
         Debug.Assert(rule != null);
         rule.SetRule(rData);
@@ -122,5 +136,11 @@ public partial class GameController : MonoBehaviour
         {
             this.playSlots[index].ResetBorderColor();
         }
+    }
+
+    private void RefreshGameLabels()
+    {
+        this.scoreLabel.text = $"Score : {this.score}";
+        this.lifeLabel.text = $"Lifes : {this.lifeCount}";
     }
 }

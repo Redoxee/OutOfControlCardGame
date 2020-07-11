@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public partial class GameController
@@ -9,6 +9,7 @@ public partial class GameController
         Initializing = 0,
         CardRuleChoice = 1,
         CardPlacement = 2,
+        Lost = 3,
     }
 
     private void Bind()
@@ -42,29 +43,6 @@ public partial class GameController
 
     public void OnHandRuleHovered(BorderComponent slot, bool on)
     {
-        RuleSlot ruleSlot = (RuleSlot)slot;
-        if (on)
-        {
-            if (ruleSlot.Rule != null && ruleSlot.Rule.Data != null)
-            {
-                ruleSlot.Rule.Data.GetAllowedSlots(ref this.handSlots[0].Card.Data, this.playSlots, ref this.workingAllowedArray);
-                for (int slotIndex = 0; slotIndex < 9; ++slotIndex)
-                {
-                    if (!this.workingAllowedArray[slotIndex])
-                    {
-                        this.playSlots[slotIndex].SetBorderColor(Color.red);
-                    }
-                    else
-                    {
-                        this.playSlots[slotIndex].SetBorderColor(Color.green);
-                    }
-                }
-            }
-        }
-        else
-        {
-            this.ResetPlayMatHoverBorders();
-        }
     }
 
     public void OnHandCardPressed(BorderComponent slot, bool isOn)
@@ -164,6 +142,8 @@ public partial class GameController
             return;
         }
 
+        int numberOfFailures = 0;
+
         for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
         {
             RuleData ruleData = this.playRuleSlots[ruleIndex].Rule?.Data;
@@ -176,12 +156,31 @@ public partial class GameController
             int y = index / 3;
             bool isAllowed = ruleData.IsSlotAllowed(ref this.nextCardSlot.Card.Data, this.playSlots, x, y);
 
-            if (!isAllowed)
+            if (isAllowed)
             {
+                this.score += 1;
+                this.playRuleSlots[ruleIndex].Rule.FlashGreen();
+                this.playRuleSlots[ruleIndex].FlashGreen();
+            }
+            else
+            {
+                numberOfFailures++;
                 this.playRuleSlots[ruleIndex].Rule.FlashRed();
                 this.playRuleSlots[ruleIndex].FlashRed();
             }
         }
+
+        if (numberOfFailures > 0)
+        {
+            this.lifeCount--;
+            if (this.lifeCount < 1)
+            {
+                this.currentState = State.Lost;
+                StartCoroutine(this.EndGameRoutine());
+            }
+        }
+
+        this.RefreshGameLabels();
 
         if (this.playSlots[index].Card != null)
         {
@@ -193,5 +192,17 @@ public partial class GameController
         this.nextCardSlot.Card = null;
 
         this.currentState = State.CardRuleChoice;
+    }
+
+    private IEnumerator EndGameRoutine()
+    {
+        yield return new UnityEngine.WaitForSeconds(3);
+        MainManager mainManager = MainManager.Instance;
+        if (mainManager == null)
+        {
+            yield break;
+        }
+
+        mainManager.NotifyEndGame(this.score);
     }
 }

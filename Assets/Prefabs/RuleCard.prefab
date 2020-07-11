@@ -122,8 +122,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -355,6 +355,7 @@ MonoBehaviour:
   Border: {fileID: 5164905605695061048}
   baseBorderColor: {r: 0.79215693, g: 0.79215693, b: 0.79215693, a: 1}
   hoverBorderColor: {r: 1, g: 0.9738725, b: 0.7688679, a: 1}
+  Index: -1
   label: {fileID: 5164905605503013307}
 --- !u!61 &7955121618974109229
 BoxCollider2D:

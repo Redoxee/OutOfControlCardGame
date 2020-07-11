@@ -59,10 +59,15 @@ public class BorderComponent : MonoBehaviour
 
     public void FlashRed()
     {
-        StartCoroutine(this.FlashRedRoutine(3));
+        StartCoroutine(this.FlashRedRoutine(3, Color.red));
     }
 
-    private IEnumerator FlashRedRoutine(float duration)
+    public void FlashGreen()
+    {
+        StartCoroutine(this.FlashRedRoutine(3, Color.green));
+    }
+
+    private IEnumerator FlashRedRoutine(float duration, Color color)
     {
         float startTime = UnityEngine.Time.realtimeSinceStartup;
         float timer = UnityEngine.Time.realtimeSinceStartup - startTime;
@@ -71,7 +76,7 @@ public class BorderComponent : MonoBehaviour
         while (timer < duration)
         {
             timer = UnityEngine.Time.realtimeSinceStartup - startTime;
-            Color currentColor = Color.Lerp(this.baseBorderColor, Color.red, Mathf.Sin(timer * blinkFactor) * .5f + .5f);
+            Color currentColor = Color.Lerp(this.baseBorderColor, color, Mathf.Sin(timer * blinkFactor) * .5f + .5f);
             this.SetBorderColor(currentColor);
             yield return null;
         }
