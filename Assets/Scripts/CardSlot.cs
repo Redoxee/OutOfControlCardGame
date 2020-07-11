@@ -4,4 +4,5 @@ using UnityEngine;
 
 public class CardSlot : BorderComponent
 {
+    public Card Card = null;
 }

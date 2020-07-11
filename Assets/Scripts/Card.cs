@@ -5,7 +5,7 @@ using TMPro;
 
 public class Card : BorderComponent
 {
-    public CardData cardData;
+    public CardData Data;
 
     [SerializeField]
     private TextMeshPro NumberLabel = null;
@@ -14,16 +14,16 @@ public class Card : BorderComponent
 
     public void SetCard(CardData cardData)
     {
-        this.cardData = cardData;
+        this.Data = cardData;
         this.RefreshVisuals();
     }
 
     void RefreshVisuals()
     {
-        this.NumberLabel.text = this.cardData.NumberValue.ToString();
+        this.NumberLabel.text = this.Data.NumberValue.ToString();
 
         string sigilDisplay = string.Empty;
-        switch (this.cardData.Sigil)
+        switch (this.Data.Sigil)
         {
             case Sigil.Star:
                 sigilDisplay = "*";

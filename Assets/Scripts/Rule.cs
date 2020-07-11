@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuleCard : BorderComponent
+public class Rule : BorderComponent
 {
+    public RuleData Data = null;
 }

@@ -4,4 +4,5 @@ using UnityEngine;
 
 public class RuleSlot : BorderComponent
 {
+    public Rule Rule = null;
 }
