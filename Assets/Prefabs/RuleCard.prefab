@@ -198,7 +198,7 @@ MonoBehaviour:
   m_renderer: {fileID: 5164905605503013310}
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8202660663769233563}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
-  color: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
+  color: {r: 1, g: 0.9725491, b: 0.95294124, a: 1}
   pivot: 1
   width: 6.85
   height: 0.75
@@ -354,8 +354,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Back: {fileID: 967605032571684331}
   Border: {fileID: 5164905605695061048}
-  baseBorderColor: {r: 0.79215693, g: 0.79215693, b: 0.79215693, a: 1}
-  hoverBorderColor: {r: 1, g: 0.9738725, b: 0.7688679, a: 1}
+  baseBorderColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverBorderColor: {r: 1, g: 1, b: 1, a: 1}
   Index: -1
   label: {fileID: 5164905605503013307}
 --- !u!61 &7955121618974109229

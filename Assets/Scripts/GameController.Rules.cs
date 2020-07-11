@@ -79,6 +79,7 @@ public partial class GameController
                     Text = "Cards can't be placed in the central row",
                 }
             );
+
         availableRules.Add(new StaticArrayRule
         {
             AllowedCells = new bool[][]
@@ -90,5 +91,13 @@ public partial class GameController
 
             Text = "No constraint",
         });
+
+        availableRules.Add(new DifferentSigilAdjascentRule
+        {
+        });
+
+        availableRules.Add(new OddCardsOnOddCardsRule());
+
+        availableRules.Add(new EvenCardsMustBeStackedRule());
     }
 }

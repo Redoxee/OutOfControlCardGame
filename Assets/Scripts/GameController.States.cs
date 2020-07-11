@@ -159,14 +159,14 @@ public partial class GameController
             if (isAllowed)
             {
                 this.score += 1;
-                this.playRuleSlots[ruleIndex].Rule.FlashGreen();
                 this.playRuleSlots[ruleIndex].FlashGreen();
+                this.playRuleSlots[ruleIndex].PlayCheckMark();
             }
             else
             {
                 numberOfFailures++;
-                this.playRuleSlots[ruleIndex].Rule.FlashRed();
                 this.playRuleSlots[ruleIndex].FlashRed();
+                this.playRuleSlots[ruleIndex].PlayCrossMark();
             }
         }
 

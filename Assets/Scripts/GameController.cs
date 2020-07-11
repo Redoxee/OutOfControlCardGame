@@ -5,6 +5,8 @@ using TMPro;
 
 public partial class GameController : MonoBehaviour
 {
+    public const int GridSize = 3;
+
     [SerializeField]
     private CardSlot[] handSlots = null;
     [SerializeField]
