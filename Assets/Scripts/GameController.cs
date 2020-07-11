@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public partial class GameController : MonoBehaviour
 {
     [SerializeField]
     private CardSlot[] handSlots = null;
@@ -14,12 +14,17 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private RuleSlot[] playRuleSlots = null;
 
+    [SerializeField]
+    private CardSlot nextCardSlot = null;
+
     private List<CardData> availableCards = new List<CardData>();
 
     private List<RuleData> availableRules = new List<RuleData>();
 
     private void Start()
     {
+        this.Bind();
+
         this.InitializeCardData();
         this.InitializeRuleData();
 
@@ -27,9 +32,11 @@ public class GameController : MonoBehaviour
         this.DrawCardForSlot(1);
         this.DrawCardForSlot(2);
 
-        this.InitializeRuleSlots();
-
         this.DrawRuleForSlot(0);
+        this.DrawRuleForSlot(1);
+        this.DrawRuleForSlot(2);
+
+        this.currentState = State.CardRuleChoice;
     }
 
     [SerializeField]
@@ -55,25 +62,6 @@ public class GameController : MonoBehaviour
 
                 this.availableCards.Add(cData);
             }
-        }
-    }
-
-    private void InitializeRuleData()
-    {
-        this.availableRules.Clear();
-
-        availableRules.Add(
-                new DiagonalRule {
-                    TargetedSigil = Sigil.Star,
-                }
-            );
-    }
-
-    private void InitializeRuleSlots()
-    {
-        for (int index = 0; index < 3; ++index)
-        {
-            this.handRuleSlots[index].OnHover += OnHandRuleHovered;
         }
     }
 
@@ -123,36 +111,9 @@ public class GameController : MonoBehaviour
         GameObject ruleObject = Instantiate(this.rulePrefab);
         Rule rule = ruleObject.GetComponent<Rule>();
         Debug.Assert(rule != null);
-        rule.Data = rData;
+        rule.SetRule(rData);
         ruleObject.transform.position = this.handRuleSlots[slotIndex].transform.position;
         this.handRuleSlots[slotIndex].Rule = rule;
-    }
-
-    public void OnHandRuleHovered(BorderComponent slot, bool on)
-    {
-        RuleSlot ruleSlot = (RuleSlot)slot;
-        if (on)
-        {
-            if (ruleSlot.Rule != null && ruleSlot.Rule.Data != null)
-            {
-                ruleSlot.Rule.Data.GetAllowedSlots(ref this.handSlots[0].Card.Data, this.playSlots, ref this.workingAllowedArray);
-                for (int slotIndex = 0; slotIndex < 9; ++slotIndex)
-                {
-                    if (!this.workingAllowedArray[slotIndex])
-                    {
-                        this.playSlots[slotIndex].SetBorderColor(Color.red);
-                    }
-                    else
-                    {
-                        this.playSlots[slotIndex].SetBorderColor(Color.green);
-                    }
-                }
-            }
-        }
-        else
-        {
-            this.ResetPlayMatHoverBorders();
-        }
     }
 
     private void ResetPlayMatHoverBorders()

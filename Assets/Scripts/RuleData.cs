@@ -21,45 +21,40 @@ public abstract class RuleData
     public abstract bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y);
 }
 
-public class DiagonalRule : RuleData
+public class StaticArrayRule : RuleData
 {
+    public string Text = string.Empty;
+
     public Sigil TargetedSigil;
     public int[] Numbers;
 
-    public bool forceOnArray = true;
+    public bool ForceOnArray = true;
 
-    private bool[][] allowedCells =
-        {
-            new bool[]{ true    , false , true  },
-            new bool[]{ false   , true  , false },
-            new bool[]{ true    , false , true  },
-        };
+    public bool[][] AllowedCells;
+
+    public override string ToString()
+    {
+        return this.Text;
+    }
 
     public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
     {
-        bool isOnArray = this.allowedCells[x][y];
-        bool isCardMatching = false;
+        bool isOnArray = this.AllowedCells[y][x];
+        bool isCardMatching = true;
         if(((int)this.TargetedSigil > 0) 
-            && ((this.TargetedSigil & card.Sigil) > 0))
+            && ((this.TargetedSigil & card.Sigil) == 0))
         {
-            isCardMatching = true;
+            isCardMatching = false;
         }
 
-        if (this.Numbers != null && System.Array.IndexOf(this.Numbers, card.NumberValue) > -1)
+        if (this.Numbers != null && System.Array.IndexOf(this.Numbers, card.NumberValue) < 0)
         {
-            isCardMatching = true;
+            isCardMatching &= false;
         }
 
-        if (forceOnArray)
+        if (this.ForceOnArray)
         {
-            if (isCardMatching)
-            {
-                return isOnArray;
-            }
-            else
-            {
-                return true;
-            }
+            return isOnArray;
         }
         else
         {

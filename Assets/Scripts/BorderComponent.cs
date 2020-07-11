@@ -15,8 +15,11 @@ public class BorderComponent : MonoBehaviour
     [SerializeField]
     private Color hoverBorderColor = Color.grey;
 
+    public int Index = -1;
+
     public delegate void Interaction(BorderComponent component, bool on);
     public event Interaction OnHover;
+    public event Interaction OnPressed;
 
     private void OnMouseEnter()
     {
@@ -33,6 +36,14 @@ public class BorderComponent : MonoBehaviour
         if (OnHover != null)
         {
             this.OnHover(this, false);
+        }
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        if (this.OnPressed != null)
+        {
+            this.OnPressed(this, true);
         }
     }
 

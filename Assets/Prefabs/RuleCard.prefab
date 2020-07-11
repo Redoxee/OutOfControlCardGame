@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5164905605503013304}
   - component: {fileID: 5164905605503013307}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,6 +355,7 @@ MonoBehaviour:
   Border: {fileID: 5164905605695061048}
   baseBorderColor: {r: 0.79215693, g: 0.79215693, b: 0.79215693, a: 1}
   hoverBorderColor: {r: 1, g: 0.9738725, b: 0.7688679, a: 1}
+  label: {fileID: 5164905605503013307}
 --- !u!61 &7955121618974109229
 BoxCollider2D:
   m_ObjectHideFlags: 0
