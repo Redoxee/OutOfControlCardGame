@@ -41,14 +41,41 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void Start()
+    private CardData DrawCard()
     {
-        this.InitializeCardData();
+        if (this.availableCards.Count == 0)
+        {
+            int numberOfCards = this.allCards.Count;
+            for (int index = 0; index < numberOfCards; ++index)
+            {
+                this.availableCards.Add(this.allCards[index]);
+            }
+        }
+
+        int cardIndex = Random.Range(0, this.availableCards.Count);
+        CardData result = this.availableCards[cardIndex];
+        this.availableCards.RemoveAt(cardIndex);
+
+        return result;
+    }
+
+    private void DrawCardForSlot(int slotIndex)
+    {
+        CardData cData = this.DrawCard();
 
         GameObject cardObject = Instantiate(this.cardPrefab);
         Card card = cardObject.GetComponent<Card>();
         Debug.Assert(card != null);
-        card.SetCard(this.availableCards[39]);
-        cardObject.transform.position = this.handSlots[0].transform.position;
+        card.SetCard(cData);
+        cardObject.transform.position = this.handSlots[slotIndex].transform.position;
+    }
+
+    private void Start()
+    {
+        this.InitializeCardData();
+
+        this.DrawCardForSlot(0);
+        this.DrawCardForSlot(1);
+        this.DrawCardForSlot(2);
     }
 }
