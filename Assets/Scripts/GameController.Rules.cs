@@ -34,23 +34,61 @@ public partial class GameController
                         new bool[] {true    , false , true  },
                     },
 
-                    Text = "Cards can't be placed the center column",
+                    Text = "Cards can't be placed in the center column",
                 }
             );
 
         availableRules.Add(
                 new StaticArrayRule
                 {
-                    ForceOnArray = false,
                     AllowedCells = new bool[][]
                     {
-                        new bool[] {true    , false , true },
-                        new bool[] {true    , false , true  },
-                        new bool[] {true    , false , true  },
+                        new bool[] {false    , true , false  },
+                        new bool[] {false    , true , false  },
+                        new bool[] {false    , true , false  },
                     },
 
-                    Text = "Cards must be placed the center column",
+                    Text = "Cards can't be placed in the border column",
                 }
             );
+
+        availableRules.Add(
+                new StaticArrayRule
+                {
+                    AllowedCells = new bool[][]
+                    {
+                        new bool[] {false   , false , false  },
+                        new bool[] {true    , true  , true  },
+                        new bool[] {false   , false , false  },
+                    },
+
+                    Text = "Cards can't be placed in the top or bottom row",
+                }
+            );
+
+        availableRules.Add(
+                new StaticArrayRule
+                {
+                    AllowedCells = new bool[][]
+                    {
+                        new bool[] {true    , true  , true  },
+                        new bool[] {false   , false , false  },
+                        new bool[] {true    , true  , true  },
+                    },
+
+                    Text = "Cards can't be placed in the central row",
+                }
+            );
+        availableRules.Add(new StaticArrayRule
+        {
+            AllowedCells = new bool[][]
+            {
+                new bool[]{ true, true, true},
+                new bool[]{ true, true, true},
+                new bool[]{ true, true, true},
+            },
+
+            Text = "No constraint",
+        });
     }
 }

@@ -87,7 +87,7 @@ public partial class GameController
     {
         if (this.playRuleSlots[2].Rule != null)
         {
-            Destroy(this.playRuleSlots[2].Rule.gameObject);
+            this.DeleteRule(this.playRuleSlots[2].Rule);
         }
 
         this.playRuleSlots[2].Rule = this.playRuleSlots[1].Rule;
@@ -184,7 +184,7 @@ public partial class GameController
 
         if (this.playSlots[index].Card != null)
         {
-            Destroy(this.playSlots[index].Card.gameObject);
+            this.DeleteCard(this.playSlots[index].Card);
         }
 
         this.playSlots[index].Card = this.nextCardSlot.Card;

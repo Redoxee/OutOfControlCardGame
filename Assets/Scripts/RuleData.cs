@@ -28,8 +28,6 @@ public class StaticArrayRule : RuleData
     public Sigil TargetedSigil;
     public int[] Numbers;
 
-    public bool ForceOnArray = true;
-
     public bool[][] AllowedCells;
 
     public override string ToString()
@@ -52,20 +50,6 @@ public class StaticArrayRule : RuleData
             isCardMatching &= false;
         }
 
-        if (this.ForceOnArray)
-        {
-            return isOnArray;
-        }
-        else
-        {
-            if (isCardMatching)
-            {
-                return !isOnArray;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        return isOnArray;
     }
 }

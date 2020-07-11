@@ -31,7 +31,6 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private TextMeshPro lifeLabel = null;
 
-
     private void Start()
     {
         this.Bind();
@@ -81,16 +80,33 @@ public partial class GameController : MonoBehaviour
 
     private CardData DrawCard()
     {
-        if (this.availableCards.Count == 0)
-        {
-            this.InitializeCardData();
-        }
+        Debug.Assert(this.availableCards.Count > 0);
 
         int cardIndex = Random.Range(0, this.availableCards.Count);
         CardData result = this.availableCards[cardIndex];
         this.availableCards.RemoveAt(cardIndex);
 
         return result;
+    }
+
+    private void FreeCardData(CardData data)
+    {
+        this.availableCards.Add(data);
+    }
+
+    private RuleData DrawRule()
+    {
+        Debug.Assert(this.availableRules.Count > 0);
+
+        int ruleIndex = Random.Range(0, this.availableRules.Count);
+        RuleData rule = this.availableRules[ruleIndex];
+        this.availableRules.RemoveAt(ruleIndex);
+        return rule;
+    }
+
+    private void FreeRuleData(RuleData data)
+    {
+        this.availableRules.Add(data);
     }
 
     private void DrawCardForSlot(int slotIndex)
@@ -106,17 +122,10 @@ public partial class GameController : MonoBehaviour
         this.handSlots[slotIndex].Card = card;
     }
 
-    private RuleData DrawRule()
+    private void DeleteCard(Card card)
     {
-        if (this.availableRules.Count == 0)
-        {
-            this.InitializeRuleData();
-        }
-
-        int ruleIndex = Random.Range(0, this.availableRules.Count);
-        RuleData rule = this.availableRules[ruleIndex];
-        this.availableRules.RemoveAt(ruleIndex);
-        return rule;
+        this.FreeCardData(card.Data);
+        Destroy(card.gameObject);
     }
 
     private void DrawRuleForSlot(int slotIndex)
@@ -128,6 +137,16 @@ public partial class GameController : MonoBehaviour
         rule.SetRule(rData);
         ruleObject.transform.position = this.handRuleSlots[slotIndex].transform.position;
         this.handRuleSlots[slotIndex].Rule = rule;
+    }
+
+    private void DeleteRule(Rule rule)
+    {
+        if (rule.Data != null)
+        {
+            this.FreeRuleData(rule.Data);
+        }
+
+        Destroy(rule.gameObject);
     }
 
     private void ResetPlayMatHoverBorders()
