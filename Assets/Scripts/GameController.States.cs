@@ -85,21 +85,20 @@ public partial class GameController
 
     private void SelectHandRule(int index)
     {
-        if (this.playRuleSlots[2].Rule != null)
+        if (this.playRuleSlots[this.playRuleSlots.Length - 1].Rule != null)
         {
-            this.DeleteRule(this.playRuleSlots[2].Rule);
+            this.DeleteRule(this.playRuleSlots[this.playRuleSlots.Length - 1].Rule);
+            this.playRuleSlots[this.playRuleSlots.Length - 1].Rule = null;
         }
 
-        this.playRuleSlots[2].Rule = this.playRuleSlots[1].Rule;
-        if (this.playRuleSlots[2].Rule != null)
+        for (int ruleIndex = this.playRuleSlots.Length - 1; ruleIndex > 0; --ruleIndex)
         {
-            this.playRuleSlots[2].Rule.transform.position = this.playRuleSlots[2].transform.position;
-        }
+            this.playRuleSlots[ruleIndex].Rule = this.playRuleSlots[ruleIndex - 1].Rule;
 
-        this.playRuleSlots[1].Rule = this.playRuleSlots[0].Rule;
-        if (this.playRuleSlots[1].Rule != null)
-        {
-            this.playRuleSlots[1].Rule.transform.position = this.playRuleSlots[1].transform.position;
+            if (this.playRuleSlots[ruleIndex].Rule != null)
+            {
+                this.playRuleSlots[ruleIndex].Rule.transform.position = this.playRuleSlots[ruleIndex].transform.position;
+            }
         }
 
         this.playRuleSlots[0].Rule = this.handRuleSlots[index].Rule;
