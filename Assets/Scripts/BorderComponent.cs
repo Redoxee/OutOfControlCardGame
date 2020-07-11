@@ -11,9 +11,9 @@ public class BorderComponent : MonoBehaviour
     private Shapes.Rectangle Border = null;
 
     [SerializeField]
-    private Color baseBorderColor = Color.grey;
+    protected Color baseBorderColor = Color.grey;
     [SerializeField]
-    private Color hoverBorderColor = Color.grey;
+    protected Color hoverBorderColor = Color.grey;
 
     public int Index = -1;
 
@@ -55,5 +55,28 @@ public class BorderComponent : MonoBehaviour
     public void ResetBorderColor()
     {
         this.Border.Color = this.baseBorderColor;
+    }
+
+    public void FlashRed()
+    {
+        StartCoroutine(this.FlashRedRoutine(3));
+    }
+
+    private IEnumerator FlashRedRoutine(float duration)
+    {
+        float startTime = UnityEngine.Time.realtimeSinceStartup;
+        float timer = UnityEngine.Time.realtimeSinceStartup - startTime;
+        float blinkCount = 9;
+        float blinkFactor = (blinkCount * Mathf.PI) / duration;
+        while (timer < duration)
+        {
+            timer = UnityEngine.Time.realtimeSinceStartup - startTime;
+            Color currentColor = Color.Lerp(this.baseBorderColor, Color.red, Mathf.Sin(timer * blinkFactor) * .5f + .5f);
+            this.SetBorderColor(currentColor);
+            yield return null;
+        }
+
+        this.ResetBorderColor();
+        yield break;
     }
 }

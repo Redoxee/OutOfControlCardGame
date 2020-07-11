@@ -164,6 +164,25 @@ public partial class GameController
             return;
         }
 
+        for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
+        {
+            RuleData ruleData = this.playRuleSlots[ruleIndex].Rule?.Data;
+            if (ruleData == null)
+            {
+                continue;
+            }
+
+            int x = index % 3;
+            int y = index / 3;
+            bool isAllowed = ruleData.IsSlotAllowed(ref this.nextCardSlot.Card.Data, this.playSlots, x, y);
+
+            if (!isAllowed)
+            {
+                this.playRuleSlots[ruleIndex].Rule.FlashRed();
+                this.playRuleSlots[ruleIndex].FlashRed();
+            }
+        }
+
         if (this.playSlots[index].Card != null)
         {
             Destroy(this.playSlots[index].Card.gameObject);
