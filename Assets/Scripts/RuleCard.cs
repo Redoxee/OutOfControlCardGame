@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardSlot : BorderComponent
+public class RuleCard : BorderComponent
 {
 }

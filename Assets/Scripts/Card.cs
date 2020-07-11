@@ -11,7 +11,7 @@ public enum Sigil
     Heart,
 }
 
-public class Card : MonoBehaviour
+public class Card : BorderComponent
 {
     public int NumberValue;
     public Sigil Sigil;
@@ -20,20 +20,4 @@ public class Card : MonoBehaviour
     private TextMeshPro NumberLabel = null;
     [SerializeField]
     private TextMeshPro SigilLabel = null;
-
-    public Color BaseBorderColor = Color.black;
-    public Color HoverColor = Color.yellow;
-
-    [SerializeField]
-    private Shapes.ShapeRenderer borderRectangle = null;
-
-    private void OnMouseEnter()
-    {
-        this.borderRectangle.Color = this.HoverColor;
-    }
-
-    private void OnMouseExit()
-    {
-        this.borderRectangle.Color = this.BaseBorderColor;
-    }
 }

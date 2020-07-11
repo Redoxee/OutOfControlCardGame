@@ -118,13 +118,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25c885c8f38ebc4bad685f4e6a0963e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Back: {fileID: 8077816300479862182}
+  Border: {fileID: 8077816302133685530}
+  baseBorderColor: {r: 0, g: 0, b: 0, a: 1}
+  hoverBorderColor: {r: 0.9763344, g: 1, b: 0.6367924, a: 1}
   NumberValue: 0
   Sigil: 0
   NumberLabel: {fileID: 8077816302077244640}
   SigilLabel: {fileID: 8077816302094711757}
-  BaseBorderColor: {r: 0, g: 0, b: 0, a: 1}
-  HoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  borderRectangle: {fileID: 8077816302133685530}
 --- !u!61 &8077816300479862181
 BoxCollider2D:
   m_ObjectHideFlags: 0
