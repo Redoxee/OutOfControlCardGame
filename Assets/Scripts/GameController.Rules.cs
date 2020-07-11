@@ -43,12 +43,26 @@ public partial class GameController
                 {
                     AllowedCells = new bool[][]
                     {
-                        new bool[] {false    , true , false  },
-                        new bool[] {false    , true , false  },
-                        new bool[] {false    , true , false  },
+                        new bool[] {false    , true , true  },
+                        new bool[] {false    , true , true  },
+                        new bool[] {false    , true , true  },
                     },
 
-                    Text = "Cards can't be placed in the border column",
+                    Text = "Cards can't be placed in the left column",
+                }
+            );
+
+        availableRules.Add(
+                new StaticArrayRule
+                {
+                    AllowedCells = new bool[][]
+                    {
+                        new bool[] { true, true , false  },
+                        new bool[] { true, true , false  },
+                        new bool[] { true, true , false  },
+                    },
+
+                    Text = "Cards can't be placed in the right column",
                 }
             );
 
@@ -59,10 +73,24 @@ public partial class GameController
                     {
                         new bool[] {false   , false , false  },
                         new bool[] {true    , true  , true  },
+                        new bool[] {true   , true , true  },
+                    },
+
+                    Text = "Cards can't be placed in the top row",
+                }
+            );
+
+        availableRules.Add(
+                new StaticArrayRule
+                {
+                    AllowedCells = new bool[][]
+                    {
+                        new bool[] {true    , true  , true  },
+                        new bool[] {true   , true , true  },
                         new bool[] {false   , false , false  },
                     },
 
-                    Text = "Cards can't be placed in the top or bottom row",
+                    Text = "Cards can't be placed in the bottom row",
                 }
             );
 
