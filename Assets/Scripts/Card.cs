@@ -22,25 +22,6 @@ public class Card : BorderComponent
     {
         this.NumberLabel.text = this.Data.NumberValue.ToString();
 
-        string sigilDisplay = string.Empty;
-        switch (this.Data.Sigil)
-        {
-            case Sigil.Star:
-                sigilDisplay = "*";
-                break;
-            case Sigil.Cross:
-                sigilDisplay = "+";
-                break;
-            case Sigil.Serpent:
-                sigilDisplay = "~";
-                break;
-            case Sigil.Heart:
-                sigilDisplay = "<3";
-                break;
-            default:
-                throw new System.NotImplementedException();
-        }
-
-        this.SigilLabel.text = sigilDisplay;
+        this.SigilLabel.text = SigilUtils.SigilToChar(this.Data.Sigil);
     }
 }
