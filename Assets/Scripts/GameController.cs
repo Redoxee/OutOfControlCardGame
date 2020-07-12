@@ -17,8 +17,22 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private RuleSlot[] playRuleSlots = null;
 
+    private Card nextPlayedCard = null;
+
     [SerializeField]
-    private CardSlot nextCardSlot = null;
+    private AnimationCurve randomPointerCurve;
+    [SerializeField]
+    private float randomPointerAnimationDuration = 2;
+    [SerializeField]
+    private GameObject cardRandomPointer = null;
+    [SerializeField]
+    private GameObject ruleRandomPointer = null;
+
+    [SerializeField]
+    private PlayLeftPanel leftPanel = null;
+
+    [SerializeField]
+    private TutorialRightPanel tutorialRightPanel = null;
 
     private List<CardData> availableCards = new List<CardData>();
 

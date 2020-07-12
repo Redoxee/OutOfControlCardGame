@@ -10,6 +10,7 @@ public partial class GameController
         CardRuleChoice = 1,
         CardPlacement = 2,
         Lost = 3,
+        TransitionToPlacement = 4,
     }
 
     private void Bind()
@@ -56,6 +57,8 @@ public partial class GameController
         this.SelectCard(cardSlot.Index);
         this.SelectRandomRule();
         this.currentState = State.CardPlacement;
+
+        this.tutorialRightPanel.FadeOutIfNeeded();
     }
 
     public void OnHandRulePressed(BorderComponent slot, bool isOn)
@@ -68,16 +71,11 @@ public partial class GameController
         RuleSlot ruleSlot = (RuleSlot)slot;
         this.SelectHandRule(ruleSlot.Index);
         this.SelectRandomCard();
-        this.currentState = State.CardPlacement;
     }
-
+    
     private void SelectCard(int index)
     {
-        this.nextCardSlot.Card = this.handSlots[index].Card;
-        if (this.nextCardSlot.Card != null)
-        {
-            this.nextCardSlot.Card.transform.position = this.nextCardSlot.transform.position;
-        }
+        this.nextPlayedCard = this.handSlots[index].Card;
 
         this.handSlots[index].Card = null;
         this.DrawCardForSlot(index);
@@ -113,14 +111,66 @@ public partial class GameController
 
     private void SelectRandomRule()
     {
-        int ruleIndex = UnityEngine.Random.Range(0, 3);
-        this.SelectHandRule(ruleIndex);
+        this.currentState = State.TransitionToPlacement;
+        StartCoroutine(this.RandomRuleCoroutine());
+    }
+
+    public IEnumerator RandomRuleCoroutine()
+    {
+        int selectedindex = UnityEngine.Random.Range(0, this.handRuleSlots.Length);
+        float start = Time.timeSinceLevelLoad;
+        float timer = Time.timeSinceLevelLoad - start;
+        this.ruleRandomPointer.gameObject.SetActive(true);
+
+        while (timer < this.randomPointerAnimationDuration)
+        {
+            timer = Time.timeSinceLevelLoad - start;
+            float progression = this.randomPointerCurve.Evaluate(timer / this.randomPointerAnimationDuration);
+            int fakeIndex = (int)(progression * this.handSlots.Length * 8 + selectedindex) % this.handRuleSlots.Length;
+            this.ruleRandomPointer.transform.position = this.handRuleSlots[fakeIndex].transform.position;
+            yield return null;
+        }
+
+        this.handRuleSlots[selectedindex].FlashGreen();
+        yield return new WaitForSeconds(2);
+        this.ruleRandomPointer.gameObject.SetActive(false);
+
+        this.currentState = State.CardPlacement;
+
+        this.tutorialRightPanel.FadeOutIfNeeded();
+        this.SelectHandRule(selectedindex);
     }
 
     private void SelectRandomCard()
     {
-        int cardIndex = UnityEngine.Random.Range(0, 3);
-        this.SelectCard(cardIndex);
+        this.currentState = State.TransitionToPlacement;
+        this.StartCoroutine(this.RandomCardRoutine());
+    }
+
+    public IEnumerator RandomCardRoutine()
+    {
+        int selectedindex = UnityEngine.Random.Range(0, this.handSlots.Length);
+        float start = Time.timeSinceLevelLoad;
+        float timer = Time.timeSinceLevelLoad - start;
+        this.cardRandomPointer.gameObject.SetActive(true);
+
+        while (timer < this.randomPointerAnimationDuration)
+        {
+            timer = Time.timeSinceLevelLoad - start;
+            float progression = this.randomPointerCurve.Evaluate(timer / this.randomPointerAnimationDuration);
+            int fakeIndex = (int)(progression * this.handSlots.Length * 8 + selectedindex) % this.handSlots.Length;
+            this.cardRandomPointer.transform.position = this.handSlots[fakeIndex].transform.position;
+            yield return null;
+        }
+
+        this.handSlots[selectedindex].FlashGreen();
+        yield return new WaitForSeconds(2);
+        this.cardRandomPointer.gameObject.SetActive(false);
+
+        this.currentState = State.CardPlacement;
+
+        this.tutorialRightPanel.FadeOutIfNeeded();
+        this.SelectCard(selectedindex);
     }
 
     public void OnPlayMatCardPressed(BorderComponent slot, bool isOn)
@@ -136,7 +186,7 @@ public partial class GameController
 
     private void PlayCard(int index)
     {
-        if (this.nextCardSlot.Card == null)
+        if (this.nextPlayedCard == null)
         {
             return;
         }
@@ -153,7 +203,7 @@ public partial class GameController
 
             int x = index % 3;
             int y = index / 3;
-            bool isAllowed = ruleData.IsSlotAllowed(ref this.nextCardSlot.Card.Data, this.playSlots, x, y);
+            bool isAllowed = ruleData.IsSlotAllowed(ref this.nextPlayedCard.Data, this.playSlots, x, y);
 
             if (isAllowed)
             {
@@ -186,9 +236,9 @@ public partial class GameController
             this.DeleteCard(this.playSlots[index].Card);
         }
 
-        this.playSlots[index].Card = this.nextCardSlot.Card;
+        this.playSlots[index].Card = this.nextPlayedCard;
         this.playSlots[index].Card.transform.position = this.playSlots[index].transform.position;
-        this.nextCardSlot.Card = null;
+        this.nextPlayedCard = null;
 
         this.currentState = State.CardRuleChoice;
     }
