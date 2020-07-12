@@ -15,6 +15,9 @@ public class BorderComponent : MonoBehaviour
     [SerializeField]
     protected Color hoverBorderColor = Color.grey;
 
+    [SerializeField]
+    protected Color baseBackColor = Color.white;
+
     public int Index = -1;
 
     public delegate void Interaction(BorderComponent component, bool on);
@@ -59,24 +62,55 @@ public class BorderComponent : MonoBehaviour
 
     public void FlashRed()
     {
-        StartCoroutine(this.FlashRedRoutine(3, Color.red));
+        StartCoroutine(this.FlashRoutine(3, 9, Color.red));
     }
 
     public void FlashGreen()
     {
-        StartCoroutine(this.FlashRedRoutine(3, Color.green));
+        StartCoroutine(this.FlashRoutine(3, 9, Color.green));
     }
 
-    private IEnumerator FlashRedRoutine(float duration, Color color)
+    public void FlashWhite()
+    {
+        StartCoroutine(this.FlashRoutine(2, 2, Color.white));
+    }
+
+    public void FadeBorderToColor(Color color, Color backColor, float duration)
+    {
+        StartCoroutine(this.FadeBorderColor(color, backColor, duration));
+    }
+
+    private IEnumerator FadeBorderColor(Color color, Color backColor, float duration)
     {
         float startTime = UnityEngine.Time.realtimeSinceStartup;
-        float timer = UnityEngine.Time.realtimeSinceStartup - startTime;
-        float blinkCount = 9;
-        float blinkFactor = (blinkCount * Mathf.PI) / duration;
+        float timer = 0;
+
         while (timer < duration)
         {
             timer = UnityEngine.Time.realtimeSinceStartup - startTime;
-            Color currentColor = Color.Lerp(this.baseBorderColor, color, Mathf.Sin(timer * blinkFactor) * .5f + .5f);
+            float progression = timer / duration;
+            this.Border.Color = this.baseBorderColor + (color - this.baseBorderColor) * progression;
+            this.Back.Color = this.baseBackColor + (backColor - this.baseBackColor) * progression;
+            yield return null;
+        }
+
+        this.Border.Color = color;
+        this.baseBorderColor = color;
+        this.baseBackColor = backColor;
+    }
+
+
+    private IEnumerator FlashRoutine(float duration,int blinkCount, Color color)
+    {
+        float startTime = UnityEngine.Time.realtimeSinceStartup;
+        float timer = 0;
+        float blinkFactor = (blinkCount * Mathf.PI * 2);
+        float offset = Mathf.PI * .5f;
+        while (timer < duration)
+        {
+            timer = UnityEngine.Time.realtimeSinceStartup - startTime;
+            float progression = timer / duration;
+            Color currentColor = Color.Lerp(this.baseBorderColor, color, Mathf.Sin(progression * blinkFactor - offset) * .5f + .5f);
             this.SetBorderColor(currentColor);
             yield return null;
         }

@@ -17,6 +17,9 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private RuleSlot[] playRuleSlots = null;
 
+    [SerializeField]
+    private BorderComponent playMatBorder = null;
+
     private Card nextPlayedCard = null;
     private Rule nextRule = null;
 

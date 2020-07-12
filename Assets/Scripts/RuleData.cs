@@ -58,7 +58,7 @@ public class DifferentSigilAdjascentRule : RuleData
 {
     public override string ToString()
     {
-        return "Same symblos can't share edges";
+        return "Same symbols can't share edges";
     }
 
     public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
@@ -107,7 +107,7 @@ public class OddCardsOnOddCardsRule : RuleData
 {
     public override string ToString()
     {
-        return "Odd cards can't be stacked";
+        return "Odd cards can't be stacked on odd cards";
     }
 
     public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)

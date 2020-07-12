@@ -56,7 +56,6 @@ public partial class GameController
         CardSlot cardSlot = (CardSlot)slot;
         this.SelectCard(cardSlot.Index);
         this.SelectRandomRule(cardSlot.Index);
-        this.currentState = State.CardPlacement;
 
         this.tutorialRightPanel.FadeOutIfNeeded();
     }
@@ -190,6 +189,8 @@ public partial class GameController
 
         Vector3 lastRuleEndPosition = rulesPositions[rulesPositions.Length - 1] + new Vector3(12, 0, 0);
 
+        FlashPlayMat();
+
         while (timer < translationDuration)
         {
             timer = Time.timeSinceLevelLoad - startDate;
@@ -214,6 +215,7 @@ public partial class GameController
 
             yield return null;
         }
+
         this.PlaceRulesOnPlayMat();
 
         this.DrawCardForSlot(cardIndex);
@@ -243,6 +245,15 @@ public partial class GameController
         if (this.playRuleSlots[0].Rule != null)
         {
             this.playRuleSlots[0].Rule.transform.position = this.playRuleSlots[0].transform.position;
+        }
+    }
+
+    private void FlashPlayMat()
+    {
+        this.playMatBorder.FlashWhite();
+        for (int index = 0; index < this.playSlots.Length; ++index)
+        {
+            this.playSlots[index].FlashWhite();
         }
     }
 
@@ -283,6 +294,10 @@ public partial class GameController
             {
                 numberOfFailures++;
             }
+            else
+            {
+                this.score++;
+            }
         }
 
         if (numberOfFailures > 0)
@@ -298,11 +313,6 @@ public partial class GameController
         this.RefreshGameLabels();
         this.currentState = State.TransitionToPlacement;
         StartCoroutine(this.PlayCardRoutine(cardIndex, rulesPoints));
-    }
-
-    private void EndPlayCardRoutine(Card oldCard)
-    {
-
     }
 
     private IEnumerator PlayCardRoutine(int cardSlotindex, bool[] rulesPoints)
@@ -352,6 +362,13 @@ public partial class GameController
         {
             this.DeleteCard(this.playSlots[cardSlotindex].Card);
         }
+
+        Color noBorder = Color.black;
+        noBorder.a = 0;
+        Color backColor = Color.white;
+        backColor.a = .5f;
+
+        this.nextPlayedCard.FadeBorderToColor(noBorder, backColor, .5f);
 
         this.playSlots[cardSlotindex].Card = this.nextPlayedCard;
         this.playSlots[cardSlotindex].Card.transform.position = this.playSlots[cardSlotindex].transform.position;
