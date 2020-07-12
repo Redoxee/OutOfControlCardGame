@@ -55,6 +55,9 @@ public partial class GameController : MonoBehaviour
     private TextMeshPro lifeLabel = null;
 
     [SerializeField]
+    private Transform IntermediateCardAnchor = null;
+
+    [SerializeField]
     private Transform rulePreDestination = null;
     [SerializeField]
     private AnimationCurve ruleSlideCurve;
@@ -64,6 +67,15 @@ public partial class GameController : MonoBehaviour
     private AnimationCurve playCardCurve;
     [SerializeField]
     private AnimationCurve playCardScaleCurve;
+
+    [SerializeField]
+    private Transform HandTransform = null;
+    [SerializeField]
+    private AnimationCurve HandAnimationCurve;
+    [SerializeField]
+    private Transform VisibleHandPosition = null;
+    [SerializeField]
+    private Transform HiddenHandPosition = null;
 
     private void Start()
     {
@@ -168,7 +180,7 @@ public partial class GameController : MonoBehaviour
         Debug.Assert(card != null);
         card.SetCard(cData);
         cardObject.transform.position = this.handSlots[slotIndex].transform.position;
-
+        cardObject.transform.SetParent(this.handSlots[slotIndex].transform, true);
         this.handSlots[slotIndex].Card = card;
     }
 

@@ -9,10 +9,6 @@ public class PlayLeftPanel : MonoBehaviour
     const string outAnimation = "PlayPanelOutAnimation";
     [SerializeField]
     private Animation fadeAnimation = null;
-    [SerializeField]
-    private BoxCollider2D collider = null;
-
-    public Transform CardAnchor = null;
 
     public void FadeIn()
     {
@@ -21,7 +17,6 @@ public class PlayLeftPanel : MonoBehaviour
             this.fadeAnimation.Stop();
         }
 
-        this.collider.enabled = true;
         this.fadeAnimation.Play(PlayLeftPanel.inAnimation);
     }
 
@@ -32,7 +27,6 @@ public class PlayLeftPanel : MonoBehaviour
             this.fadeAnimation.Stop();
         }
 
-        this.collider.enabled = false;
         this.fadeAnimation.Play(PlayLeftPanel.outAnimation);
     }
 }

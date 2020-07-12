@@ -151,11 +151,13 @@ public partial class GameController
 
     IEnumerator PrepareCardPlacementRoutine(int cardIndex, int ruleIndex)
     {
-        this.leftPanel.FadeIn();
+        this.leftPanel.FadeOut();
+
         Vector3 nextCardPosition = this.nextPlayedCard.transform.position;
-        Vector3 cardEndPosition = this.leftPanel.CardAnchor.transform.position;
+        Vector3 cardEndPosition = this.IntermediateCardAnchor.position;
 
         nextCardPosition.z = cardEndPosition.z;
+        this.nextPlayedCard.transform.SetParent(this.transform, true);
         this.nextPlayedCard.transform.position = nextCardPosition;
 
         Vector3 ruleStartingPosition = this.nextRule.transform.position;
@@ -163,20 +165,27 @@ public partial class GameController
         ruleStartingPosition.z = rulePreDestination.z;
         this.nextRule.transform.position = ruleStartingPosition;
 
-        float translationDuration = 1;
+        Vector3 handStartPosition = this.VisibleHandPosition.position;
+        Vector3 handEndPosition = this.HiddenHandPosition.position;
+
+        float translationDuration = .5f;
         float startDate = Time.timeSinceLevelLoad;
         float timer = 0;
         while (timer < translationDuration)
         {
             timer = Time.timeSinceLevelLoad - startDate;
-            float progression = this.cardSlideCurve.Evaluate(timer / translationDuration);
-            this.nextPlayedCard.transform.position = nextCardPosition + (cardEndPosition - nextCardPosition) * progression;
+            float cardProgression = this.cardSlideCurve.Evaluate(timer / translationDuration);
+            this.nextPlayedCard.transform.position = nextCardPosition + (cardEndPosition - nextCardPosition) * cardProgression;
 
-            this.nextRule.transform.position = ruleStartingPosition + (rulePreDestination - ruleStartingPosition) * progression;
+            this.nextRule.transform.position = ruleStartingPosition + (rulePreDestination - ruleStartingPosition) * cardProgression;
+
+            float handProgression = this.HandAnimationCurve.Evaluate(timer / translationDuration);
+            this.HandTransform.transform.position = handStartPosition + (handEndPosition - handStartPosition) * handProgression;
             yield return null;
         }
 
         this.nextPlayedCard.transform.position = cardEndPosition;
+        this.HandTransform.transform.position = handEndPosition;
 
         timer = 0;
         startDate = Time.timeSinceLevelLoad;
@@ -315,7 +324,7 @@ public partial class GameController
     {
         float startDate = Time.timeSinceLevelLoad;
         float timer = 0;
-        Vector3 startPosition = this.leftPanel.CardAnchor.transform.position;
+        Vector3 startPosition = this.IntermediateCardAnchor.transform.position;
         Vector3 endPosition = this.playSlots[cardSlotindex].transform.position;
         endPosition.z -= 3;
         startPosition.z = endPosition.z;
@@ -352,6 +361,25 @@ public partial class GameController
             yield return new WaitForSeconds(.5f);
         }
 
+        timer = 0;
+        float translationDuration = .5f;
+        startDate = Time.timeSinceLevelLoad;
+        Vector3 handStartPosition = this.HiddenHandPosition.position;
+        Vector3 handEndPosition = this.VisibleHandPosition.position;
+
+        this.leftPanel.FadeIn();
+
+        while (timer < translationDuration)
+        {
+            timer = Time.timeSinceLevelLoad - startDate;
+
+            float handProgression = this.HandAnimationCurve.Evaluate(timer / translationDuration);
+            this.HandTransform.transform.position = handStartPosition + (handEndPosition - handStartPosition) * handProgression;
+
+            yield return null;
+        }
+
+        this.HandTransform.transform.position = handEndPosition;
         this.RefreshGameLabels();
 
         if (this.playSlots[cardSlotindex].Card != null)
@@ -378,7 +406,6 @@ public partial class GameController
         }
 
         this.currentState = State.CardRuleChoice;
-        this.leftPanel.FadeOut();
     }
 
     private IEnumerator EndGameRoutine()

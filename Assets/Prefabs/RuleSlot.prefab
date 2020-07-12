@@ -142,7 +142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5280413087065350909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: -3}
+  m_LocalPosition: {x: -2.55, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5860788351556713696}
@@ -313,7 +313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6343899157950826151}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: -3}
+  m_LocalPosition: {x: -2.55, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4208143477309362651}
@@ -401,8 +401,8 @@ MonoBehaviour:
   blendMode: 1
   color: {r: 1, g: 1, b: 1, a: 1}
   pivot: 1
-  width: 7
-  height: 0.75
+  width: 5.7
+  height: 1.2
   type: 1
   cornerRadiusMode: 0
   cornerRadii: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
@@ -470,6 +470,7 @@ MonoBehaviour:
   Border: {fileID: 8963221819472822477}
   baseBorderColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   hoverBorderColor: {r: 1, g: 0.9966706, b: 0.6084906, a: 1}
+  baseBackColor: {r: 1, g: 1, b: 1, a: 1}
   Index: -1
   Rule: {fileID: 0}
   CheckMark: {fileID: 5280413087065350909}
@@ -500,7 +501,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7, y: 0.75}
+  m_Size: {x: 5.65, y: 0.91}
   m_EdgeRadius: 0
 --- !u!1 &8963221819472822481
 GameObject:
@@ -550,8 +551,8 @@ MonoBehaviour:
   blendMode: 1
   color: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
   pivot: 1
-  width: 7.2
-  height: 0.95
+  width: 5.9
+  height: 1.4
   type: 3
   cornerRadiusMode: 0
   cornerRadii: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
