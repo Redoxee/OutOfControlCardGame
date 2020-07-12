@@ -29,6 +29,9 @@ public partial class GameController : MonoBehaviour
     private GameObject ruleRandomPointer = null;
 
     [SerializeField]
+    private AnimationCurve cardSlideCurve;
+
+    [SerializeField]
     private PlayLeftPanel leftPanel = null;
 
     [SerializeField]
