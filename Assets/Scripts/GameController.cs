@@ -18,6 +18,7 @@ public partial class GameController : MonoBehaviour
     private RuleSlot[] playRuleSlots = null;
 
     private Card nextPlayedCard = null;
+    private Rule nextRule = null;
 
     [SerializeField]
     private AnimationCurve randomPointerCurve;
@@ -49,6 +50,11 @@ public partial class GameController : MonoBehaviour
     private TextMeshPro scoreLabel = null;
     [SerializeField]
     private TextMeshPro lifeLabel = null;
+
+    [SerializeField]
+    private Transform rulePreDestination = null;
+    [SerializeField]
+    AnimationCurve ruleSlideCurve;
 
     private void Start()
     {

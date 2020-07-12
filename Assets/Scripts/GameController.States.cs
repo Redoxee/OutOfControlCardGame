@@ -82,28 +82,7 @@ public partial class GameController
 
     private void SelectHandRule(int index)
     {
-        if (this.playRuleSlots[this.playRuleSlots.Length - 1].Rule != null)
-        {
-            this.DeleteRule(this.playRuleSlots[this.playRuleSlots.Length - 1].Rule);
-            this.playRuleSlots[this.playRuleSlots.Length - 1].Rule = null;
-        }
-
-        for (int ruleIndex = this.playRuleSlots.Length - 1; ruleIndex > 0; --ruleIndex)
-        {
-            this.playRuleSlots[ruleIndex].Rule = this.playRuleSlots[ruleIndex - 1].Rule;
-
-            if (this.playRuleSlots[ruleIndex].Rule != null)
-            {
-                this.playRuleSlots[ruleIndex].Rule.transform.position = this.playRuleSlots[ruleIndex].transform.position;
-            }
-        }
-
-        this.playRuleSlots[0].Rule = this.handRuleSlots[index].Rule;
-        if (this.playRuleSlots[0].Rule != null)
-        {
-            this.playRuleSlots[0].Rule.transform.position = this.playRuleSlots[0].transform.position;
-        }
-
+        this.nextRule = this.handRuleSlots[index].Rule;
         this.handRuleSlots[index].Rule = null;
     }
 
@@ -178,24 +157,95 @@ public partial class GameController
         this.leftPanel.FadeIn();
         Vector3 nextCardPosition = this.nextPlayedCard.transform.position;
         Vector3 cardEndPosition = this.leftPanel.CardAnchor.transform.position;
+
         nextCardPosition.z = cardEndPosition.z;
         this.nextPlayedCard.transform.position = nextCardPosition;
+
+        Vector3 ruleStartingPosition = this.nextRule.transform.position;
+        Vector3 rulePreDestination = this.rulePreDestination.position;
+        ruleStartingPosition.z = rulePreDestination.z;
+        this.nextRule.transform.position = ruleStartingPosition;
+
         float translationDuration = 1;
-        float start = Time.timeSinceLevelLoad;
+        float startDate = Time.timeSinceLevelLoad;
         float timer = 0;
         while (timer < translationDuration)
         {
-            timer = Time.timeSinceLevelLoad - start;
+            timer = Time.timeSinceLevelLoad - startDate;
             float progression = this.cardSlideCurve.Evaluate(timer / translationDuration);
             this.nextPlayedCard.transform.position = nextCardPosition + (cardEndPosition - nextCardPosition) * progression;
+
+            this.nextRule.transform.position = ruleStartingPosition + (rulePreDestination - ruleStartingPosition) * progression;
             yield return null;
         }
 
         this.nextPlayedCard.transform.position = cardEndPosition;
 
+        timer = 0;
+        startDate = Time.timeSinceLevelLoad;
+        Vector3[] rulesPositions = new Vector3[this.playRuleSlots.Length];
+
+        for (int index = 0; index < rulesPositions.Length; ++index)
+        {
+            rulesPositions[index] = this.playRuleSlots[index].transform.position;
+        }
+
+        Vector3 lastRuleEndPosition = rulesPositions[rulesPositions.Length - 1] + new Vector3(12, 0, 0);
+
+        while (timer < translationDuration)
+        {
+            timer = Time.timeSinceLevelLoad - startDate;
+            float progression = timer / translationDuration;
+            progression = this.ruleSlideCurve.Evaluate(progression);
+
+            for (int index = 0; index < rulesPositions.Length - 1; ++index)
+            {
+                if (this.playRuleSlots[index].Rule != null)
+                {
+                    this.playRuleSlots[index].Rule.transform.position = rulesPositions[index] + (rulesPositions[index + 1] - rulesPositions[index]) * progression;
+                }
+            }
+
+            int lastIndex = rulesPositions.Length - 1;
+            if (this.playRuleSlots[lastIndex].Rule != null)
+            {
+                this.playRuleSlots[lastIndex].Rule.transform.position = rulesPositions[lastIndex] + (lastRuleEndPosition - rulesPositions[lastIndex]) * progression;
+            }
+
+            this.nextRule.transform.position = rulePreDestination + (rulesPositions[0] - rulePreDestination) * progression;
+
+            yield return null;
+        }
+        this.PlaceRulesOnPlayMat();
+
         this.DrawCardForSlot(cardIndex);
         this.DrawRuleForSlot(ruleIndex);
         this.currentState = State.CardPlacement;
+    }
+
+    private void PlaceRulesOnPlayMat()
+    {
+        if (this.playRuleSlots[this.playRuleSlots.Length - 1].Rule != null)
+        {
+            this.DeleteRule(this.playRuleSlots[this.playRuleSlots.Length - 1].Rule);
+            this.playRuleSlots[this.playRuleSlots.Length - 1].Rule = null;
+        }
+
+        for (int ruleIndex = this.playRuleSlots.Length - 1; ruleIndex > 0; --ruleIndex)
+        {
+            this.playRuleSlots[ruleIndex].Rule = this.playRuleSlots[ruleIndex - 1].Rule;
+
+            if (this.playRuleSlots[ruleIndex].Rule != null)
+            {
+                this.playRuleSlots[ruleIndex].Rule.transform.position = this.playRuleSlots[ruleIndex].transform.position;
+            }
+        }
+
+        this.playRuleSlots[0].Rule = this.nextRule;
+        if (this.playRuleSlots[0].Rule != null)
+        {
+            this.playRuleSlots[0].Rule.transform.position = this.playRuleSlots[0].transform.position;
+        }
     }
 
     public void OnPlayMatCardPressed(BorderComponent slot, bool isOn)
