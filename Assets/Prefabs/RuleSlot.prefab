@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
-  color: {r: 0.3372549, g: 0.23137257, b: 0.28627452, a: 1}
+  color: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 1}
   pivot: 1
   width: 6
   height: 0.72
@@ -570,9 +570,10 @@ MonoBehaviour:
   Back: {fileID: 8963221817992172600}
   Border: {fileID: 8963221819472822477}
   baseBorderColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverBorderColor: {r: 0.8175584, g: 0.8235294, b: 0.19215684, a: 1}
+  hoverBorderColor: {r: 1, g: 0.9738725, b: 0.7688679, a: 1}
   baseBackColor: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 1}
   Index: -1
+  DeactivateHover: 0
   Rule: {fileID: 0}
   CheckMark: {fileID: 5280413087065350909}
   CheckMarkAnimation: {fileID: 8217871915126241025}

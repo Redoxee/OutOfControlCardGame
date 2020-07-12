@@ -118,10 +118,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Back: {fileID: 3114032527475754532}
   Border: {fileID: 3114032528119215370}
-  baseBorderColor: {r: 0.79215693, g: 0.79215693, b: 0.79215693, a: 1}
+  baseBorderColor: {r: 1, g: 1, b: 1, a: 1}
   hoverBorderColor: {r: 1, g: 0.9738725, b: 0.7688679, a: 1}
   baseBackColor: {r: 1, g: 1, b: 1, a: 1}
   Index: -1
+  DeactivateHover: 0
   Card: {fileID: 0}
 --- !u!61 &1965485201001603484
 BoxCollider2D:

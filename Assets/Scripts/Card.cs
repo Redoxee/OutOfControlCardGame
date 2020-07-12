@@ -9,8 +9,12 @@ public class Card : BorderComponent
 
     [SerializeField]
     private TextMeshPro NumberLabel = null;
+
     [SerializeField]
-    private TextMeshPro SigilLabel = null;
+    private Sprite[] sprites = null;
+
+    [SerializeField]
+    SpriteRenderer SigilSprite = null;
 
     public void SetCard(CardData cardData)
     {
@@ -22,6 +26,23 @@ public class Card : BorderComponent
     {
         this.NumberLabel.text = this.Data.NumberValue.ToString();
 
-        this.SigilLabel.text = SigilUtils.SigilToChar(this.Data.Sigil);
+        Sprite sprite = null;
+        switch (this.Data.Sigil)
+        {
+            case Sigil.Star:
+                sprite = this.sprites[0];
+                break;
+            case Sigil.Moon:
+                sprite = this.sprites[1];
+                break;
+            case Sigil.Diamond:
+                sprite = this.sprites[2];
+                break;
+            case Sigil.Leaf:
+                sprite = this.sprites[3];
+                break;
+        }
+
+        this.SigilSprite.sprite = sprite;
     }
 }
