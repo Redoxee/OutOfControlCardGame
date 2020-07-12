@@ -297,6 +297,7 @@ public partial class GameController
             else
             {
                 this.score++;
+                this.TransferOneCombinedRule();
             }
         }
 

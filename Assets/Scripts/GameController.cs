@@ -132,8 +132,24 @@ public partial class GameController : MonoBehaviour
     {
         Debug.Assert(this.availableRules.Count > 0);
 
-        int ruleIndex = Random.Range(0, this.availableRules.Count);
-        RuleData rule = this.availableRules[ruleIndex];
+        int ruleIndex = -1;
+        RuleData rule = null;
+        int safeGuard = 100;
+        while (ruleIndex < 0 && safeGuard > 0)
+        {
+            ruleIndex = Random.Range(0, this.availableRules.Count);
+            rule = this.availableRules[ruleIndex];
+
+            if (rule.IsContained(this.handRuleSlots[0].Rule?.Data) ||
+                rule.IsContained(this.handRuleSlots[1].Rule?.Data) ||
+                rule.IsContained(this.handRuleSlots[2].Rule?.Data))
+            {
+                ruleIndex = -1;
+            }
+
+            safeGuard--;
+        }
+
         this.availableRules.RemoveAt(ruleIndex);
         return rule;
     }

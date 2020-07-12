@@ -19,6 +19,50 @@ public abstract class RuleData
     }
 
     public abstract bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y);
+
+    public bool IsContained(RuleData other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        if (this == other)
+        {
+            return true;
+        }
+
+        if (this is CombinedRule meCombined)
+        {
+            if(meCombined.rule1 == other || meCombined.rule2 == other)
+            {
+                return true;
+            }
+        }
+
+        if (other is CombinedRule heCombined)
+        {
+            if (heCombined.rule1 == other || heCombined.rule2 == other)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+public class NoConstraintRule : RuleData
+{
+    public override string ToString()
+    {
+        return "No Constraints";
+    }
+
+    public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
+    {
+        return true;
+    }
 }
 
 public class StaticArrayRule : RuleData
@@ -158,5 +202,21 @@ public class EvenCardsMustBeStackedRule : RuleData
         }
 
         return true;
+    }
+}
+
+public class CombinedRule : RuleData
+{
+    public RuleData rule1 = null;
+    public RuleData rule2 = null;
+    public override string ToString()
+    {
+        return $"{this.rule1.ToString()}\n{this.rule2.ToString()}";
+    }
+
+    public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
+    {
+        return this.rule1.IsSlotAllowed(ref card, cardSlots, x, y) && 
+            this.rule1.IsSlotAllowed(ref card, cardSlots, x, y);
     }
 }
