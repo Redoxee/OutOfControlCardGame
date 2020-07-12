@@ -136,7 +136,7 @@ public class EvenCardsMustBeStackedRule : RuleData
 {
     public override string ToString()
     {
-        return "Even cards must placed on even cards";
+        return "Even cards must be placed on even cards";
     }
 
     public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
