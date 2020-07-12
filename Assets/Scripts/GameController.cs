@@ -54,7 +54,13 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private Transform rulePreDestination = null;
     [SerializeField]
-    AnimationCurve ruleSlideCurve;
+    private AnimationCurve ruleSlideCurve;
+
+    public float playCardAnimDuration = 1;
+    [SerializeField]
+    private AnimationCurve playCardCurve;
+    [SerializeField]
+    private AnimationCurve playCardScaleCurve;
 
     private void Start()
     {

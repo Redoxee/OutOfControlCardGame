@@ -143,9 +143,7 @@ public partial class GameController
         this.handSlots[selectedindex].FlashGreen();
         yield return new WaitForSeconds(2);
         this.cardRandomPointer.gameObject.SetActive(false);
-
-        this.currentState = State.CardPlacement;
-
+        
         this.tutorialRightPanel.FadeOutIfNeeded();
         this.SelectCard(selectedindex);
 
@@ -259,7 +257,7 @@ public partial class GameController
         PlayCard(cardSlot.Index);
     }
 
-    private void PlayCard(int index)
+    private void PlayCard(int cardIndex)
     {
         if (this.nextPlayedCard == null)
         {
@@ -267,6 +265,7 @@ public partial class GameController
         }
 
         int numberOfFailures = 0;
+        bool[] rulesPoints = new bool[this.playRuleSlots.Length];
 
         for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
         {
@@ -276,21 +275,13 @@ public partial class GameController
                 continue;
             }
 
-            int x = index % 3;
-            int y = index / 3;
+            int x = cardIndex % 3;
+            int y = cardIndex / 3;
             bool isAllowed = ruleData.IsSlotAllowed(ref this.nextPlayedCard.Data, this.playSlots, x, y);
-
-            if (isAllowed)
-            {
-                this.score += 1;
-                this.playRuleSlots[ruleIndex].FlashGreen();
-                this.playRuleSlots[ruleIndex].PlayCheckMark();
-            }
-            else
+            rulesPoints[ruleIndex] = isAllowed;
+            if (!isAllowed)
             {
                 numberOfFailures++;
-                this.playRuleSlots[ruleIndex].FlashRed();
-                this.playRuleSlots[ruleIndex].PlayCrossMark();
             }
         }
 
@@ -305,14 +296,65 @@ public partial class GameController
         }
 
         this.RefreshGameLabels();
+        this.currentState = State.TransitionToPlacement;
+        StartCoroutine(this.PlayCardRoutine(cardIndex, rulesPoints));
+    }
 
-        if (this.playSlots[index].Card != null)
+    private void EndPlayCardRoutine(Card oldCard)
+    {
+
+    }
+
+    private IEnumerator PlayCardRoutine(int cardSlotindex, bool[] rulesPoints)
+    {
+        float startDate = Time.timeSinceLevelLoad;
+        float timer = 0;
+        Vector3 startPosition = this.leftPanel.CardAnchor.transform.position;
+        Vector3 endPosition = this.playSlots[cardSlotindex].transform.position;
+        endPosition.z -= 3;
+        startPosition.z = endPosition.z;
+
+        while (timer < this.playCardAnimDuration)
         {
-            this.DeleteCard(this.playSlots[index].Card);
+            timer = Time.timeSinceLevelLoad - startDate;
+            float progression = timer / this.playCardAnimDuration;
+            this.nextPlayedCard.transform.position = startPosition + (endPosition - startPosition) * this.playCardCurve.Evaluate(progression);
+            this.nextPlayedCard.transform.localScale = Vector3.one * this.playCardScaleCurve.Evaluate(progression);
+
+            yield return null;
         }
 
-        this.playSlots[index].Card = this.nextPlayedCard;
-        this.playSlots[index].Card.transform.position = this.playSlots[index].transform.position;
+        for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
+        {
+            RuleData ruleData = this.playRuleSlots[ruleIndex].Rule?.Data;
+            if (ruleData == null)
+            {
+                continue;
+            }
+
+            if (rulesPoints[ruleIndex])
+            {
+                this.playRuleSlots[ruleIndex].FlashGreen();
+                this.playRuleSlots[ruleIndex].PlayCheckMark();
+            }
+            else
+            {
+                this.playRuleSlots[ruleIndex].FlashRed();
+                this.playRuleSlots[ruleIndex].PlayCrossMark();
+            }
+
+            yield return new WaitForSeconds(.5f);
+        }
+
+        this.RefreshGameLabels();
+
+        if (this.playSlots[cardSlotindex].Card != null)
+        {
+            this.DeleteCard(this.playSlots[cardSlotindex].Card);
+        }
+
+        this.playSlots[cardSlotindex].Card = this.nextPlayedCard;
+        this.playSlots[cardSlotindex].Card.transform.position = this.playSlots[cardSlotindex].transform.position;
         this.nextPlayedCard = null;
 
         this.currentState = State.CardRuleChoice;
