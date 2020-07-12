@@ -123,8 +123,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -252,14 +252,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
-  color: {r: 1, g: 0.9725491, b: 0.95294124, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 0}
   pivot: 1
-  width: 5.7
-  height: 1.25
+  width: 6.16
+  height: 0.89
   type: 3
   cornerRadiusMode: 0
-  cornerRadii: {x: 0.15, y: 0.15, z: 0.15, w: 0.15}
-  thickness: 0.3
+  cornerRadii: {x: 0.12, y: 0.12, z: 0.12, w: 0.12}
+  thickness: 0.1
 --- !u!33 &5164905605695061051
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
   Back: {fileID: 967605032571684331}
   Border: {fileID: 5164905605695061048}
   baseBorderColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverBorderColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverBorderColor: {r: 0.98564017, g: 1, b: 0, a: 1}
   baseBackColor: {r: 1, g: 1, b: 1, a: 1}
   Index: -1
   label: {fileID: 5164905605503013307}
@@ -535,13 +535,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 0.3372549, g: 0.23137257, b: 0.28627452, a: 1}
   pivot: 1
-  width: 5.55
-  height: 1.15
+  width: 6
+  height: 0.72
   type: 1
   cornerRadiusMode: 0
-  cornerRadii: {x: 0.15, y: 0.15, z: 0.15, w: 0.15}
+  cornerRadii: {x: 0.12, y: 0.12, z: 0.12, w: 0.12}
   thickness: 0.1
 --- !u!33 &8491391818762120339
 MeshFilter:
