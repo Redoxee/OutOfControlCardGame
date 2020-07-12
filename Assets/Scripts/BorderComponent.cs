@@ -5,10 +5,10 @@ using UnityEngine;
 public class BorderComponent : MonoBehaviour
 {
     [SerializeField]
-    private Shapes.Rectangle Back = null;
+    protected Shapes.Rectangle Back = null;
 
     [SerializeField]
-    private Shapes.Rectangle Border = null;
+    protected Shapes.Rectangle Border = null;
 
     [SerializeField]
     protected Color baseBorderColor = Color.grey;
