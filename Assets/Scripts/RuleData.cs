@@ -180,7 +180,7 @@ public class EvenCardsMustBeStackedRule : RuleData
 {
     public override string ToString()
     {
-        return "Even cards must be placed on even cards";
+        return "Even cards can't be played on odd cards";
     }
 
     public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
