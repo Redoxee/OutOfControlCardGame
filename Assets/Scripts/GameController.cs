@@ -101,6 +101,8 @@ public partial class GameController : MonoBehaviour
         {
             this.playRuleSlots[index].DeactivateHover = true;
         }
+
+        this.RefreshGameLabels();
     }
 
     [SerializeField]
@@ -227,6 +229,6 @@ public partial class GameController : MonoBehaviour
     private void RefreshGameLabels()
     {
         this.scoreLabel.text = $"Score : {this.score}";
-        this.lifeLabel.text = $"Lifes : {this.lifeCount}";
+        this.lifeLabel.text = $"Lives : {this.lifeCount}";
     }
 }

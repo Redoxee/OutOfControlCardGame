@@ -193,7 +193,7 @@ public class EvenCardsMustBeStackedRule : RuleData
         CardSlot prevSlot = cardSlots[y * GameController.GridSize + x];
         if (prevSlot.Card == null)
         {
-            return false;
+            return true;
         }
 
         if (prevSlot.Card.Data.NumberValue % 2 != 0)
