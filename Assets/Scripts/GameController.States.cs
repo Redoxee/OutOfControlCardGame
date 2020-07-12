@@ -303,11 +303,6 @@ public partial class GameController
         if (numberOfFailures > 0)
         {
             this.lifeCount--;
-            if (this.lifeCount < 1)
-            {
-                this.currentState = State.Lost;
-                StartCoroutine(this.EndGameRoutine());
-            }
         }
 
         this.RefreshGameLabels();
@@ -373,6 +368,13 @@ public partial class GameController
         this.playSlots[cardSlotindex].Card = this.nextPlayedCard;
         this.playSlots[cardSlotindex].Card.transform.position = this.playSlots[cardSlotindex].transform.position;
         this.nextPlayedCard = null;
+        
+        if (this.lifeCount < 1)
+        {
+            this.currentState = State.Lost;
+            StartCoroutine(this.EndGameRoutine());
+            yield break;
+        }
 
         this.currentState = State.CardRuleChoice;
         this.leftPanel.FadeOut();
