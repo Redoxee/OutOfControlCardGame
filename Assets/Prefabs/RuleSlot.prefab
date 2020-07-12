@@ -569,7 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Back: {fileID: 8963221817992172600}
   Border: {fileID: 8963221819472822477}
-  baseBorderColor: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 1}
+  baseBorderColor: {r: 1, g: 1, b: 1, a: 1}
   hoverBorderColor: {r: 0.8175584, g: 0.8235294, b: 0.19215684, a: 1}
   baseBackColor: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 1}
   Index: -1

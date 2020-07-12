@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 0.6944642, g: 0.9622642, b: 0.93626416, a: 1}
   type: 0
   colorMode: 0
   colorOuterStart: {r: 1, g: 1, b: 1, a: 1}

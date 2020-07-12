@@ -24,8 +24,15 @@ public class BorderComponent : MonoBehaviour
     public event Interaction OnHover;
     public event Interaction OnPressed;
 
+    public bool DeactivateHover = false;
+
     private void OnMouseEnter()
     {
+        if (this.DeactivateHover)
+        {
+            return;
+        }
+
         this.Border.Color = this.hoverBorderColor;
         if (OnHover != null)
         {
@@ -35,6 +42,11 @@ public class BorderComponent : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (this.DeactivateHover)
+        {
+            return;
+        }
+
         this.Border.Color = this.baseBorderColor;
         if (OnHover != null)
         {
@@ -72,7 +84,7 @@ public class BorderComponent : MonoBehaviour
 
     public void FlashWhite()
     {
-        StartCoroutine(this.FlashRoutine(2, 2, Color.white));
+        StartCoroutine(this.FlashRoutine(2, 2, Color.yellow));
     }
 
     public void FadeBorderToColor(Color color, Color backColor, float duration)

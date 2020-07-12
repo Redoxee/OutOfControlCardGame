@@ -96,6 +96,11 @@ public partial class GameController : MonoBehaviour
 
         this.score = 0;
         this.lifeCount = this.startingLives;
+
+        for (int index = 0; index < this.playRuleSlots.Length; ++index)
+        {
+            this.playRuleSlots[index].DeactivateHover = true;
+        }
     }
 
     [SerializeField]

@@ -253,10 +253,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Back: {fileID: 8170264638238256766}
   Border: {fileID: 8077816302133685530}
-  baseBorderColor: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 1}
+  baseBorderColor: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 0}
   hoverBorderColor: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 0}
   baseBackColor: {r: 0.4449537, g: 0.9528302, b: 0.92128503, a: 0.5254902}
   Index: -1
+  DeactivateHover: 0
   NumberLabel: {fileID: 8077816302077244640}
   SigilLabel: {fileID: 8077816302094711757}
 --- !u!61 &8077816300479862181

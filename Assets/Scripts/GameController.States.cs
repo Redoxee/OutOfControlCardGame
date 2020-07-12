@@ -388,7 +388,7 @@ public partial class GameController
         }
 
         Color noBorder = Color.black;
-        noBorder.a = 0;
+        noBorder.a = 0f;
         Color backColor = Color.white;
         backColor.a = .5f;
 
