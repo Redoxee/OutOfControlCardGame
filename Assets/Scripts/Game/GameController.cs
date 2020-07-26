@@ -24,7 +24,7 @@ public partial class GameController : MonoBehaviour
     private Rule nextRule = null;
 
     [SerializeField]
-    private AnimationCurve randomPointerCurve;
+    private AnimationCurve randomPointerCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
     [SerializeField]
     private float randomPointerAnimationDuration = 2;
     [SerializeField]
@@ -33,17 +33,16 @@ public partial class GameController : MonoBehaviour
     private GameObject ruleRandomPointer = null;
 
     [SerializeField]
-    private AnimationCurve cardSlideCurve;
+    private AnimationCurve cardSlideCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
 
     [SerializeField]
     private PlayLeftPanel leftPanel = null;
 
     [SerializeField]
-    private TutorialRightPanel tutorialRightPanel = null;
-
     private List<CardData> availableCards = new List<CardData>();
 
-    private List<RuleData> availableRules = new List<RuleData>();
+    [SerializeField]
+    private List<RuleDefinition> availableRules = new List<RuleDefinition>();
 
     [SerializeField]
     private int startingLives = 4;
@@ -60,26 +59,44 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private Transform rulePreDestination = null;
     [SerializeField]
-    private AnimationCurve ruleSlideCurve;
+    private AnimationCurve ruleSlideCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
 
     public float playCardAnimDuration = 1;
     [SerializeField]
-    private AnimationCurve playCardCurve;
+    private AnimationCurve playCardCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
     [SerializeField]
-    private AnimationCurve playCardScaleCurve;
+    private AnimationCurve playCardScaleCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
 
     [SerializeField]
     private Transform HandTransform = null;
     [SerializeField]
-    private AnimationCurve HandAnimationCurve;
+    private AnimationCurve HandAnimationCurve = new AnimationCurve(new Keyframe[]{new Keyframe(0, 0), new Keyframe(1, 1) });
     [SerializeField]
     private Transform VisibleHandPosition = null;
     [SerializeField]
     private Transform HiddenHandPosition = null;
 
-    private void Start()
+    private IEnumerator Start()
     {
         this.Bind();
+
+        if (MainManager.Instance == null)
+        {
+            MainManager.LoadMainSceneIfNecessary();
+
+            int failSafe = 200;
+            while (failSafe > 0 && MainManager.Instance == null)
+            {
+                failSafe--;
+                yield return null;
+            }
+
+            if (failSafe <= 0)
+            {
+                yield break;
+            }
+        }
+
 
         this.InitializeCardData();
         this.InitializeRuleData();
@@ -99,10 +116,51 @@ public partial class GameController : MonoBehaviour
 
         for (int index = 0; index < this.playRuleSlots.Length; ++index)
         {
-            this.playRuleSlots[index].DeactivateHover = true;
+            this.playRuleSlots[index].DeactivateHover = false;
+            this.playRuleSlots[index].OnHover += OnPlayRuleHover;
         }
 
         this.RefreshGameLabels();
+    }
+
+    private void OnDisable()
+    {
+        for (int index = 0; index < this.playRuleSlots.Length; ++index)
+        {
+            this.playRuleSlots[index].OnHover -= OnPlayRuleHover;
+        }
+    }
+
+    private void OnPlayRuleHover(BorderComponent component, bool hovered)
+    {
+        RuleSlot slot = component.gameObject.GetComponent<RuleSlot>();
+        if (currentState != State.CardPlacement || 
+            slot.Rule == null ||
+            !hovered)
+        {
+            for (int index = 0; index < this.playSlots.Length; ++index)
+            {
+                this.playSlots[index].ResetBorderColor();
+            }
+
+            return;
+        }
+
+        for (int x = 0; x < GameController.GridSize; ++x)
+        {
+            for (int y = 0; y < GameController.GridSize; ++y)
+            {
+                int slotIndex = y * GameController.GridSize + x;
+                if (slot.Rule.Data.IsSlotAllowed(ref this.nextPlayedCard.Data, this.playSlots, x, y))
+                {
+                    this.playSlots[slotIndex].SetBorderColor(Color.green);
+                }
+                else
+                {
+                    this.playSlots[slotIndex].SetBorderColor(Color.red);
+                }
+            }
+        }
     }
 
     [SerializeField]
@@ -147,33 +205,21 @@ public partial class GameController : MonoBehaviour
         this.availableCards.Add(data);
     }
 
-    private RuleData DrawRule()
+    private RuleDefinition DrawRule()
     {
         Debug.Assert(this.availableRules.Count > 0);
 
         int ruleIndex = -1;
-        RuleData rule = null;
-        int safeGuard = 100;
-        while (ruleIndex < 0 && safeGuard > 0)
-        {
-            ruleIndex = Random.Range(0, this.availableRules.Count);
-            rule = this.availableRules[ruleIndex];
+        RuleDefinition rule = null;
 
-            if (rule.IsContained(this.handRuleSlots[0].Rule?.Data) ||
-                rule.IsContained(this.handRuleSlots[1].Rule?.Data) ||
-                rule.IsContained(this.handRuleSlots[2].Rule?.Data))
-            {
-                ruleIndex = -1;
-            }
-
-            safeGuard--;
-        }
+        ruleIndex = Random.Range(0, this.availableRules.Count);
+        rule = this.availableRules[ruleIndex];
 
         this.availableRules.RemoveAt(ruleIndex);
         return rule;
     }
 
-    private void FreeRuleData(RuleData data)
+    private void FreeRuleData(RuleDefinition data)
     {
         this.availableRules.Add(data);
     }
@@ -199,7 +245,7 @@ public partial class GameController : MonoBehaviour
 
     private void DrawRuleForSlot(int slotIndex)
     {
-        RuleData rData = this.DrawRule();
+        RuleDefinition rData = this.DrawRule();
         GameObject ruleObject = Instantiate(this.rulePrefab, this.transform);
         Rule rule = ruleObject.GetComponent<Rule>();
         Debug.Assert(rule != null);

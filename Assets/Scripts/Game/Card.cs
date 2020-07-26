@@ -33,19 +33,19 @@ public class Card : BorderComponent
         Color color = this.baseBackColor;
         switch (this.Data.Sigil)
         {
-            case Sigil.Star:
+            case Sigil.Diamond:
                 sprite = this.sprites[0];
                 color = this.colors[0];
                 break;
-            case Sigil.Moon:
+            case Sigil.Heart:
                 sprite = this.sprites[1];
                 color = this.colors[1];
                 break;
-            case Sigil.Diamond:
+            case Sigil.Clover:
                 sprite = this.sprites[2];
                 color = this.colors[2];
                 break;
-            case Sigil.Leaf:
+            case Sigil.Spike:
                 sprite = this.sprites[3];
                 color = this.colors[3];
                 break;

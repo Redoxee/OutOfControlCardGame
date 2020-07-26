@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 [Flags]
 public enum Sigil
 {
-    Star = 1 << 0,
-    Moon = 1 << 1,
-    Diamond = 1 << 2,
-    Leaf = 1 << 3,
+    Diamond = 1 << 0,
+    Heart   = 1 << 1,
+    Clover  = 1 << 2,
+    Spike   = 1 << 3,
 }
 
 public static class SigilUtils
@@ -19,13 +19,13 @@ public static class SigilUtils
     {
         switch (sigil)
         {
-            case Sigil.Star:
-                return "<sprite name=\"Sym0\">";
-            case Sigil.Moon:
-                return "<sprite name=\"Sym1\">";
             case Sigil.Diamond:
+                return "<sprite name=\"Sym0\">";
+            case Sigil.Heart:
+                return "<sprite name=\"Sym1\">";
+            case Sigil.Clover:
                 return "<sprite name=\"Sym2\">";
-            case Sigil.Leaf:
+            case Sigil.Spike:
                 return "<sprite name=\"Sym3\">";
             default:
                 return "?";

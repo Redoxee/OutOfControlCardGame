@@ -4,12 +4,12 @@ using TMPro;
 
 public class Rule : BorderComponent
 {
-    public RuleData Data = null;
+    public RuleDefinition Data = null;
 
     [SerializeField]
     private TextMeshPro label = null;
 
-    public void SetRule(RuleData rule)
+    public void SetRule(RuleDefinition rule)
     {
         this.Data = rule;
         this.label.text = this.Data.ToString();

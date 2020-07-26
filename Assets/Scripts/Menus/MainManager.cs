@@ -14,32 +14,74 @@ public class MainManager : MonoBehaviour
     }
 
     public int finalScore = 0;
+    public GameSettings GameSettings;
+    [SerializeField]
+    private int GameSceneBuildIndex = 1;
+
+    [SerializeField]
+    private int EndGameSceneIndex = 2;
+
+    public static void LoadMainSceneIfNecessary()
+    {
+        Debug.Log("Loading main scene");
+        bool isMainSceneLoaded = false;
+        int numberOfScene = UnityEngine.SceneManagement.SceneManager.sceneCount;
+        for (int index = 0; index < numberOfScene; ++index)
+        {
+            UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(index);
+            if (scene.buildIndex == 0)
+            {
+                isMainSceneLoaded = true;
+                break;
+            }
+        }
+
+        if (!isMainSceneLoaded)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(0, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        }
+    }
 
     private void Awake()
     {
         MainManager.instance = this;
 
-        this.LoadGameScene();
+        bool isGameSceneLoaded = false;
+        int numberOfScene = UnityEngine.SceneManagement.SceneManager.sceneCount;
+        for (int index = 0; index < numberOfScene; ++index)
+        {
+            UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(index);
+            if (scene.buildIndex == this.GameSceneBuildIndex)
+            {
+                isGameSceneLoaded = true;
+                break;
+            }
+        }
+
+        if (!isGameSceneLoaded)
+        {
+            this.LoadGameScene();
+        }
     }
 
     private void LoadGameScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(this.GameSceneBuildIndex, UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
 
     public void UnloadGameScene()
     {
-        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("GameScene");
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(this.GameSceneBuildIndex);
     }
 
     public void LoadEndGameScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndGameScene", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(this.EndGameSceneIndex, UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
 
     public void UnloadEndGameScene()
     {
-        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("EndGameScene");
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(this.EndGameSceneIndex);
     }
 
     public void NotifyEndGame(int score)

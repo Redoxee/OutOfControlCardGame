@@ -56,8 +56,6 @@ public partial class GameController
         CardSlot cardSlot = (CardSlot)slot;
         this.SelectCard(cardSlot.Index);
         this.SelectRandomRule(cardSlot.Index);
-
-        this.tutorialRightPanel.FadeOutIfNeeded();
     }
 
     public void OnHandRulePressed(BorderComponent slot, bool isOn)
@@ -111,8 +109,6 @@ public partial class GameController
         yield return new WaitForSeconds(2);
         this.ruleRandomPointer.gameObject.SetActive(false);
 
-        this.tutorialRightPanel.FadeOutIfNeeded();
-
         this.SelectHandRule(ruleIndex);
         this.StartCoroutine(this.PrepareCardPlacementRoutine(selectedCard, ruleIndex));
     }
@@ -143,7 +139,6 @@ public partial class GameController
         yield return new WaitForSeconds(2);
         this.cardRandomPointer.gameObject.SetActive(false);
         
-        this.tutorialRightPanel.FadeOutIfNeeded();
         this.SelectCard(selectedindex);
 
         yield return this.PrepareCardPlacementRoutine(selectedindex, ruleIndex);
@@ -289,15 +284,15 @@ public partial class GameController
 
         for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
         {
-            RuleData ruleData = this.playRuleSlots[ruleIndex].Rule?.Data;
-            if (ruleData == null)
+            RuleDefinition ruleDefinition = this.playRuleSlots[ruleIndex].Rule?.Data;
+            if (ruleDefinition == null)
             {
                 continue;
             }
 
             int x = cardIndex % 3;
             int y = cardIndex / 3;
-            bool isAllowed = ruleData.IsSlotAllowed(ref this.nextPlayedCard.Data, this.playSlots, x, y);
+            bool isAllowed = ruleDefinition.IsSlotAllowed(ref this.nextPlayedCard.Data, this.playSlots, x, y);
             rulesPoints[ruleIndex] = isAllowed;
             if (!isAllowed)
             {
@@ -341,8 +336,8 @@ public partial class GameController
 
         for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
         {
-            RuleData ruleData = this.playRuleSlots[ruleIndex].Rule?.Data;
-            if (ruleData == null)
+            RuleDefinition ruleDefinition = this.playRuleSlots[ruleIndex].Rule?.Data;
+            if (ruleDefinition == null)
             {
                 continue;
             }
