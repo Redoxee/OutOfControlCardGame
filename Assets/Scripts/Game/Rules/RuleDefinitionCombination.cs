@@ -1,7 +1,11 @@
 ﻿
+using UnityEngine;
+
 class RuleDefinitionCombination : RuleDefinition
 {
     public RuleDefinition[] SubRules = new RuleDefinition[0];
+
+    private System.Collections.Generic.List<Sprite> workingSpriteList = new System.Collections.Generic.List<Sprite>();
 
     public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
     {
@@ -29,5 +33,20 @@ class RuleDefinitionCombination : RuleDefinition
         }
 
         return builder.ToString();
+    }
+
+    public override Sprite[] GetRuleSprites()
+    {
+        this.workingSpriteList.Clear();
+        foreach (RuleDefinition rule in this.SubRules)
+        {
+            Sprite[] sprites = rule.GetRuleSprites();
+            foreach (Sprite sprite in sprites)
+            {
+                this.workingSpriteList.Add(sprite);
+            }
+        }
+
+        return this.workingSpriteList.ToArray();
     }
 }

@@ -5,8 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public abstract class RuleDefinition : ScriptableObject
 {
-    public Sprite MainSprite = null;
+    [SerializeField]
+    private Sprite mainSprite = null;
+
     public string Description = string.Empty;
+
+    protected Sprite[] spriteArray;
 
     public abstract bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y);
 
@@ -24,5 +28,10 @@ public abstract class RuleDefinition : ScriptableObject
     public override string ToString()
     {
         return this.Description;
+    }
+
+    public virtual Sprite[] GetRuleSprites()
+    {
+        return new Sprite[] { this.mainSprite };
     }
 }

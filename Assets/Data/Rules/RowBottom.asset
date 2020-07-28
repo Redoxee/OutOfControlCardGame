@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1d3acb552d9f24fa6ed4489a884e9d, type: 3}
   m_Name: RowBottom
   m_EditorClassIdentifier: 
-  MainSprite: {fileID: 21300000, guid: c0f809fd17bb6d943a1679fb91c27ff6, type: 3}
+  mainSprite: {fileID: 21300000, guid: c0f809fd17bb6d943a1679fb91c27ff6, type: 3}
   Description: Bottom row prohibited
   AllowedCells: 010101010101000000

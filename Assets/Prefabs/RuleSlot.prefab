@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 0
+  scaleMode: 0
   color: {r: 0.9811321, g: 0, b: 0.048500996, a: 1}
   polyPoints:
   - point: {x: -0.25, y: -0.25, z: 0}
@@ -91,6 +92,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -116,6 +118,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5280413087065350909
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,10 +226,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
+  scaleMode: 0
   color: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 1}
   pivot: 1
-  width: 6.19
-  height: 0.94
+  width: 3.11
+  height: 2.421
   type: 3
   cornerRadiusMode: 0
   cornerRadii: {x: 0.12, y: 0.12, z: 0.12, w: 0.12}
@@ -254,6 +258,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -278,6 +283,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5687968566813804245
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
+  scaleMode: 0
   color: {r: 0.32405424, g: 1, b: 0, a: 1}
   polyPoints:
   - point: {x: -0.25, y: 0, z: 0}
@@ -363,6 +370,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -388,6 +396,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6343899157950826151
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,10 +509,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
+  scaleMode: 0
   color: {r: 0.19215688, g: 0.8235295, b: 0.7843138, a: 1}
   pivot: 1
-  width: 6
-  height: 0.72
+  width: 3
+  height: 2.31
   type: 1
   cornerRadiusMode: 0
   cornerRadii: {x: 0.12, y: 0.12, z: 0.12, w: 0.12}
@@ -531,6 +541,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -555,6 +566,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &8963221817992172605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,14 +664,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blendMode: 1
+  scaleMode: 0
   color: {r: 1, g: 1, b: 1, a: 1}
   pivot: 1
-  width: 6.16
-  height: 0.89
+  width: 3.1
+  height: 2.42
   type: 3
   cornerRadiusMode: 0
   cornerRadii: {x: 0.12, y: 0.12, z: 0.12, w: 0.12}
-  thickness: 0.1
+  thickness: 0.14
 --- !u!33 &8963221819472822476
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -683,6 +696,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -707,3 +721,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

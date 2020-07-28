@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1d3acb552d9f24fa6ed4489a884e9d, type: 3}
   m_Name: ColumnRight
   m_EditorClassIdentifier: 
-  MainSprite: {fileID: 21300000, guid: f8f8f082dbd9caa4fbc944362996b0a6, type: 3}
+  mainSprite: {fileID: 21300000, guid: f8f8f082dbd9caa4fbc944362996b0a6, type: 3}
   Description: Right column prohibited
   AllowedCells: 010100010100010100
