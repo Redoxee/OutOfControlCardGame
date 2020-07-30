@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd3b555ca6303f4baa6d9f6fa201e08, type: 3}
   m_Name: RuleDefinitionNoConstraint
   m_EditorClassIdentifier: 
-  MainSprite: {fileID: 21300000, guid: 9772784f102eefe4d90cd22fd1271a1c, type: 3}
+  mainSprite: {fileID: 21300000, guid: 9772784f102eefe4d90cd22fd1271a1c, type: 3}
   Description: No Constraint
