@@ -17,14 +17,7 @@ public class InspectorButtonAttribute : PropertyAttribute
 
     public readonly string MethodName;
     public readonly string ButtonLabel;
-
-    private float _buttonWidth = kDefaultButtonWidth;
-    public float ButtonWidth
-    {
-        get { return _buttonWidth; }
-        set { _buttonWidth = value; }
-    }
-
+    
     public InspectorButtonAttribute(string MethodName, string buttonLabel = "")
     {
         this.MethodName = MethodName;
@@ -36,22 +29,22 @@ public class InspectorButtonAttribute : PropertyAttribute
 [CustomPropertyDrawer(typeof(InspectorButtonAttribute))]
 public class InspectorButtonPropertyDrawer : PropertyDrawer
 {
-    private MethodInfo _eventMethodInfo = null;
+    private MethodInfo eventMethodInfo = null;
 
     public override void OnGUI(Rect position, SerializedProperty prop, GUIContent label)
     {
-        InspectorButtonAttribute inspectorButtonAttribute = (InspectorButtonAttribute)attribute;
+        InspectorButtonAttribute inspectorButtonAttribute = (InspectorButtonAttribute)this.attribute;
         Rect buttonRect = new Rect(position.x, position.y, position.width, UnityEditor.EditorGUIUtility.singleLineHeight);
         if (GUI.Button(buttonRect, !string.IsNullOrEmpty(inspectorButtonAttribute.ButtonLabel) ? inspectorButtonAttribute.ButtonLabel : label.text))
         {
             System.Type eventOwnerType = prop.serializedObject.targetObject.GetType();
             string eventName = inspectorButtonAttribute.MethodName;
 
-            if (_eventMethodInfo == null)
-                _eventMethodInfo = eventOwnerType.GetMethod(eventName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            if (eventMethodInfo == null)
+                eventMethodInfo = eventOwnerType.GetMethod(eventName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
 
-            if (_eventMethodInfo != null)
-                _eventMethodInfo.Invoke(prop.serializedObject.targetObject, null);
+            if (eventMethodInfo != null)
+                eventMethodInfo.Invoke(prop.serializedObject.targetObject, null);
             else
                 Debug.LogWarning(string.Format("InspectorButton: Unable to find method {0} in {1}", eventName, eventOwnerType));
         }
