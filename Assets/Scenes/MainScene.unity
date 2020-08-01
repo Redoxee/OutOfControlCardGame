@@ -389,6 +389,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 30789fe04b88e854188675e218de3214, type: 2}
     - {fileID: 11400000, guid: 9df9f74c71622a94692991ff0ca37adf, type: 2}
     - {fileID: 11400000, guid: 2c8eddaf3bb77dc4786b38b4872abea4, type: 2}
+    - {fileID: 11400000, guid: e74b8c1296f92934cace0654d004266c, type: 2}
+    - {fileID: 11400000, guid: 1bd297787241e61449767f2f9f51cf05, type: 2}
+    - {fileID: 11400000, guid: 56ebb12368ccf314eaccb8d98c093c2d, type: 2}
+    - {fileID: 11400000, guid: 49a9de218bfa69642991f042424092b9, type: 2}
   GameSceneBuildIndex: 1
   EndGameSceneIndex: 2
 --- !u!4 &1445692826
