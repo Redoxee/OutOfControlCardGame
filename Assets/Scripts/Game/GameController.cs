@@ -62,11 +62,19 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private AnimationCurve ruleSlideCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
 
-    public float playCardAnimDuration = 1;
+    [SerializeField]
+    private float playCardAnimDuration = 1;
     [SerializeField]
     private AnimationCurve playCardCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
     [SerializeField]
     private AnimationCurve playCardScaleCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
+
+    [SerializeField]
+    private float playRuleAnimationDuration = 1f;
+    [SerializeField]
+    private AnimationCurve playRuleCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
+    [SerializeField]
+    private AnimationCurve playRuleScaleCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
 
     [SerializeField]
     private Transform HandTransform = null;

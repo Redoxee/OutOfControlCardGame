@@ -174,6 +174,9 @@ public partial class GameController
 
         float translationDuration = .5f;
 
+        this.nextRule.transform.DOMove(this.playRuleSlots[0].transform.position, this.playRuleAnimationDuration).SetEase(this.playRuleCurve);
+        this.nextRule.transform.DOScale(new Vector3(1.4f, 1.4f, 0), this.playRuleAnimationDuration).SetEase(this.playRuleScaleCurve);
+
         this.hideRulesTween = this.RuleHandTransform.DOMove(this.HiddenRuleHandPosition.position, translationDuration);
         this.hideRulesTween.SetEase(Ease.InCubic);
 
@@ -185,8 +188,6 @@ public partial class GameController
             float cardProgression = this.cardSlideCurve.Evaluate(timer / translationDuration);
             this.nextPlayedCard.transform.position = nextCardPosition + (cardEndPosition - nextCardPosition) * cardProgression;
 
-            this.nextRule.transform.position = ruleStartingPosition + (rulePreDestination - ruleStartingPosition) * cardProgression;
-
             float handProgression = this.HandAnimationCurve.Evaluate(timer / translationDuration);
             this.HandTransform.transform.position = handStartPosition + (handEndPosition - handStartPosition) * handProgression;
             yield return null;
@@ -197,12 +198,6 @@ public partial class GameController
 
         timer = 0;
         startDate = Time.timeSinceLevelLoad;
-        Vector3[] rulesPositions = new Vector3[this.playRuleSlots.Length];
-
-        for (int index = 0; index < rulesPositions.Length; ++index)
-        {
-            rulesPositions[index] = this.playRuleSlots[index].transform.position;
-        }
 
         FlashPlayMat();
 
@@ -211,11 +206,6 @@ public partial class GameController
         while (timer < translationDuration)
         {
             timer = Time.timeSinceLevelLoad - startDate;
-            float progression = timer / translationDuration;
-            progression = this.ruleSlideCurve.Evaluate(progression);
-
-            this.nextRule.transform.position = rulePreDestination + (rulesPositions[0] - rulePreDestination) * progression;
-
             yield return null;
         }
 
