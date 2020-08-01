@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public partial class GameController : MonoBehaviour
 {
@@ -75,6 +76,18 @@ public partial class GameController : MonoBehaviour
     private Transform VisibleHandPosition = null;
     [SerializeField]
     private Transform HiddenHandPosition = null;
+
+    [SerializeField]
+    private Transform RuleHandTransform = null;
+    [SerializeField]
+    private Transform VisibleRuleHandPosition = null;
+    [SerializeField]
+    private Transform HiddenRuleHandPosition = null;
+
+    [SerializeField]
+    private Transform RuleExitAnchor = null;
+
+    private Rule ruleToPhaseOut = null;
 
     private IEnumerator Start()
     {
@@ -246,7 +259,7 @@ public partial class GameController : MonoBehaviour
     private void DrawRuleForSlot(int slotIndex)
     {
         RuleDefinition rData = this.DrawRule();
-        GameObject ruleObject = Instantiate(this.rulePrefab, this.transform);
+        GameObject ruleObject = Instantiate(this.rulePrefab, this.handRuleSlots[slotIndex].transform);
         Rule rule = ruleObject.GetComponent<Rule>();
         Debug.Assert(rule != null);
         rule.SetRule(rData);
@@ -256,11 +269,7 @@ public partial class GameController : MonoBehaviour
 
     private void DeleteRule(Rule rule)
     {
-        if (rule.Data != null)
-        {
-            this.FreeRuleData(rule.Data);
-        }
-
+        this.FreeRuleData(rule.Data);
         Destroy(rule.gameObject);
     }
 

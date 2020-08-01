@@ -750,6 +750,7 @@ MonoBehaviour:
   CheckMarkAnimation: {fileID: 8217871915126241025}
   CrossMark: {fileID: 6343899157950826151}
   CrossMarkAnimation: {fileID: 4462904305385863413}
+  hideTween: {fileID: 0}
 --- !u!61 &8963221817992172604
 BoxCollider2D:
   m_ObjectHideFlags: 0

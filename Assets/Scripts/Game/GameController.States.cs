@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public partial class GameController
 {
@@ -11,6 +12,13 @@ public partial class GameController
         CardPlacement = 2,
         Lost = 3,
         TransitionToPlacement = 4,
+    }
+
+    public enum RulePassingState
+    {
+        None,
+        Success,
+        Failed,
     }
 
     private void Bind()
@@ -155,6 +163,7 @@ public partial class GameController
         this.nextPlayedCard.transform.SetParent(this.transform, true);
         this.nextPlayedCard.transform.position = nextCardPosition;
 
+        this.nextRule.transform.SetParent(this.transform, true);
         Vector3 ruleStartingPosition = this.nextRule.transform.position;
         Vector3 rulePreDestination = this.rulePreDestination.position;
         ruleStartingPosition.z = rulePreDestination.z;
@@ -164,6 +173,10 @@ public partial class GameController
         Vector3 handEndPosition = this.HiddenHandPosition.position;
 
         float translationDuration = .5f;
+
+        this.hideRulesTween = this.RuleHandTransform.DOMove(this.HiddenRuleHandPosition.position, translationDuration);
+        this.hideRulesTween.SetEase(Ease.InCubic);
+
         float startDate = Time.timeSinceLevelLoad;
         float timer = 0;
         while (timer < translationDuration)
@@ -191,9 +204,9 @@ public partial class GameController
             rulesPositions[index] = this.playRuleSlots[index].transform.position;
         }
 
-        Vector3 lastRuleEndPosition = rulesPositions[rulesPositions.Length - 1] + new Vector3(12, 0, 0);
-
         FlashPlayMat();
+
+        this.playRuleSlots[0].Rule = this.nextRule;
 
         while (timer < translationDuration)
         {
@@ -201,55 +214,15 @@ public partial class GameController
             float progression = timer / translationDuration;
             progression = this.ruleSlideCurve.Evaluate(progression);
 
-            for (int index = 0; index < rulesPositions.Length - 1; ++index)
-            {
-                if (this.playRuleSlots[index].Rule != null)
-                {
-                    this.playRuleSlots[index].Rule.transform.position = rulesPositions[index] + (rulesPositions[index + 1] - rulesPositions[index]) * progression;
-                }
-            }
-
-            int lastIndex = rulesPositions.Length - 1;
-            if (this.playRuleSlots[lastIndex].Rule != null)
-            {
-                this.playRuleSlots[lastIndex].Rule.transform.position = rulesPositions[lastIndex] + (lastRuleEndPosition - rulesPositions[lastIndex]) * progression;
-            }
-
             this.nextRule.transform.position = rulePreDestination + (rulesPositions[0] - rulePreDestination) * progression;
 
             yield return null;
         }
 
-        this.PlaceRulesOnPlayMat();
 
         this.DrawCardForSlot(cardIndex);
         this.DrawRuleForSlot(ruleIndex);
         this.currentState = State.CardPlacement;
-    }
-
-    private void PlaceRulesOnPlayMat()
-    {
-        if (this.playRuleSlots[this.playRuleSlots.Length - 1].Rule != null)
-        {
-            this.DeleteRule(this.playRuleSlots[this.playRuleSlots.Length - 1].Rule);
-            this.playRuleSlots[this.playRuleSlots.Length - 1].Rule = null;
-        }
-
-        for (int ruleIndex = this.playRuleSlots.Length - 1; ruleIndex > 0; --ruleIndex)
-        {
-            this.playRuleSlots[ruleIndex].Rule = this.playRuleSlots[ruleIndex - 1].Rule;
-
-            if (this.playRuleSlots[ruleIndex].Rule != null)
-            {
-                this.playRuleSlots[ruleIndex].Rule.transform.position = this.playRuleSlots[ruleIndex].transform.position;
-            }
-        }
-
-        this.playRuleSlots[0].Rule = this.nextRule;
-        if (this.playRuleSlots[0].Rule != null)
-        {
-            this.playRuleSlots[0].Rule.transform.position = this.playRuleSlots[0].transform.position;
-        }
     }
 
     private void FlashPlayMat()
@@ -272,7 +245,7 @@ public partial class GameController
         PlayCard(cardSlot.Index);
     }
 
-    private void PlayCard(int cardIndex)
+    private void PlayCard(int slotIndex)
     {
         if (this.nextPlayedCard == null)
         {
@@ -280,20 +253,21 @@ public partial class GameController
         }
 
         int numberOfFailures = 0;
-        bool[] rulesPoints = new bool[this.playRuleSlots.Length];
+        RulePassingState[] rulePassingStates = new RulePassingState[this.playRuleSlots.Length];
 
         for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
         {
             RuleDefinition ruleDefinition = this.playRuleSlots[ruleIndex].Rule?.Data;
             if (ruleDefinition == null)
             {
+                rulePassingStates[ruleIndex] = RulePassingState.None;
                 continue;
             }
 
-            int x = cardIndex % 3;
-            int y = cardIndex / 3;
+            int x = slotIndex % 3;
+            int y = slotIndex / 3;
             bool isAllowed = ruleDefinition.IsSlotAllowed(ref this.nextPlayedCard.Data, this.playSlots, x, y);
-            rulesPoints[ruleIndex] = isAllowed;
+            rulePassingStates[ruleIndex] = isAllowed ? RulePassingState.Success : RulePassingState.Failed;
             if (!isAllowed)
             {
                 numberOfFailures++;
@@ -310,12 +284,28 @@ public partial class GameController
             this.lifeCount--;
         }
 
+        if (this.playRuleSlots[this.playRuleSlots.Length - 1].Rule != null)
+        {
+            this.ruleToPhaseOut = this.playRuleSlots[this.playRuleSlots.Length - 1].Rule;
+        }
+
+        for (int index = this.playRuleSlots.Length - 1; index > 0; --index)
+        {
+            if (this.playRuleSlots[index - 1].Rule == null)
+            {
+                continue;
+            }
+
+            this.playRuleSlots[index].Rule = this.playRuleSlots[index - 1].Rule;
+            this.playRuleSlots[index].Rule.transform.SetParent(this.playRuleSlots[index].transform);
+        }
+
         this.RefreshGameLabels();
         this.currentState = State.TransitionToPlacement;
-        StartCoroutine(this.PlayCardRoutine(cardIndex, rulesPoints));
+        StartCoroutine(this.PlayCardRoutine(slotIndex, rulePassingStates));
     }
 
-    private IEnumerator PlayCardRoutine(int cardSlotindex, bool[] rulesPoints)
+    private IEnumerator PlayCardRoutine(int cardSlotindex, RulePassingState[] rulePassingStates)
     {
         float startDate = Time.timeSinceLevelLoad;
         float timer = 0;
@@ -336,13 +326,13 @@ public partial class GameController
 
         for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
         {
-            RuleDefinition ruleDefinition = this.playRuleSlots[ruleIndex].Rule?.Data;
-            if (ruleDefinition == null)
+            RulePassingState passingState = rulePassingStates[ruleIndex];
+            if (passingState == RulePassingState.None)
             {
                 continue;
             }
 
-            if (rulesPoints[ruleIndex])
+            if (passingState == RulePassingState.Success)
             {
                 this.playRuleSlots[ruleIndex].FlashGreen();
                 this.playRuleSlots[ruleIndex].PlayCheckMark();
@@ -358,6 +348,10 @@ public partial class GameController
 
         timer = 0;
         float translationDuration = .5f;
+
+        this.showRulesTween =  this.RuleHandTransform.DOMove(this.VisibleRuleHandPosition.position, translationDuration);
+        this.showRulesTween.SetEase(Ease.OutCubic);
+
         startDate = Time.timeSinceLevelLoad;
         Vector3 handStartPosition = this.HiddenHandPosition.position;
         Vector3 handEndPosition = this.VisibleHandPosition.position;
@@ -398,6 +392,28 @@ public partial class GameController
             this.currentState = State.Lost;
             StartCoroutine(this.EndGameRoutine());
             yield break;
+        }
+
+        float ruleAnimationDuration = .5f;
+        Rule ruleToRemove = this.ruleToPhaseOut;
+        if ( ruleToRemove != null)
+        {
+            Tween ruleExitTween = ruleToRemove.transform.DOMove(this.RuleExitAnchor.position, ruleAnimationDuration);
+            ruleExitTween.SetEase(Ease.InCubic);
+            ruleExitTween.onComplete += () => 
+            {
+                this.DeleteRule(ruleToRemove);
+            };
+        }
+
+        for (int index = 0; index < this.playRuleSlots.Length; ++index)
+        {
+            if (this.playRuleSlots[index].Rule == null)
+            {
+                continue;
+            }
+
+            this.playRuleSlots[index].Rule.transform.DOLocalMove(Vector3.zero, ruleAnimationDuration);
         }
 
         this.currentState = State.CardRuleChoice;

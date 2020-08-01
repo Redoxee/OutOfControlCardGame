@@ -11,7 +11,7 @@ public class Rule : BorderComponent
     private SpriteRenderer[] IconRenderer = null;
     [SerializeField]
     private float IconSeparation = 1;
-    
+
     public void SetRule(RuleDefinition rule)
     {
         this.Data = rule;
