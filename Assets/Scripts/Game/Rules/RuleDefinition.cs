@@ -8,7 +8,8 @@ public abstract class RuleDefinition : ScriptableObject
     [SerializeField]
     private Sprite mainSprite = null;
 
-    public string Description = string.Empty;
+    [SerializeField]
+    private string Description = string.Empty;
 
     protected Sprite[] spriteArray;
 

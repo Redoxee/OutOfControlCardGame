@@ -95,6 +95,9 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private Transform RuleExitAnchor = null;
 
+    [SerializeField]
+    private Tooltip toolTip = null;
+
     private Rule ruleToPhaseOut = null;
 
     private IEnumerator Start()
@@ -142,6 +145,38 @@ public partial class GameController : MonoBehaviour
         }
 
         this.RefreshGameLabels();
+
+        this.handRuleSlots[0].OnHover += (BorderComponent component, bool isHovered) =>
+        {
+            this.OnRuleHovered(this.handRuleSlots[0], isHovered);
+        };
+
+        this.handRuleSlots[1].OnHover += (BorderComponent component, bool isHovered) =>
+        {
+            this.OnRuleHovered(this.handRuleSlots[1], isHovered);
+        };
+
+        this.handRuleSlots[2].OnHover += (BorderComponent component, bool isHovered) =>
+        {
+            this.OnRuleHovered(this.handRuleSlots[2], isHovered);
+        };
+    }
+
+    private void OnRuleHovered(RuleSlot ruleSlot, bool isHovered)
+    {
+        if (isHovered)
+        {
+            if (ruleSlot == null || ruleSlot.Rule == null)
+            {
+                return;
+            }
+
+            this.toolTip.ShowTooltip(ruleSlot.Rule.Data.ToString(), ruleSlot.MainRectangle, Tooltip.AnchorPosition.Right, 2);
+        }
+        else
+        {
+            this.toolTip.Hide();
+        }
     }
 
     private void OnDisable()

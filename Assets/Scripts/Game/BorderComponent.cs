@@ -26,6 +26,14 @@ public class BorderComponent : MonoBehaviour
 
     public bool DeactivateHover = false;
 
+    public Shapes.Rectangle MainRectangle
+    {
+        get
+        {
+            return this.Back;
+        }
+    }
+
     private void OnMouseEnter()
     {
         if (this.DeactivateHover)
