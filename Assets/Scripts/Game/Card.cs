@@ -45,7 +45,7 @@ public class Card : BorderComponent
                 sprite = this.sprites[2];
                 color = this.colors[2];
                 break;
-            case Sigil.Spike:
+            case Sigil.Spade:
                 sprite = this.sprites[3];
                 color = this.colors[3];
                 break;

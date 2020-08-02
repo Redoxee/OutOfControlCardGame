@@ -10,7 +10,7 @@ public enum Sigil
     Diamond = 1 << 0,
     Heart   = 1 << 1,
     Clover  = 1 << 2,
-    Spike   = 1 << 3,
+    Spade   = 1 << 3,
 }
 
 public static class SigilUtils
@@ -25,7 +25,7 @@ public static class SigilUtils
                 return "<sprite name=\"Sym1\">";
             case Sigil.Clover:
                 return "<sprite name=\"Sym2\">";
-            case Sigil.Spike:
+            case Sigil.Spade:
                 return "<sprite name=\"Sym3\">";
             default:
                 return "?";
