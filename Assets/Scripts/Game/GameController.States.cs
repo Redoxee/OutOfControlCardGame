@@ -165,8 +165,7 @@ public partial class GameController
 
         this.nextRule.transform.SetParent(this.transform, true);
         Vector3 ruleStartingPosition = this.nextRule.transform.position;
-        Vector3 rulePreDestination = this.rulePreDestination.position;
-        ruleStartingPosition.z = rulePreDestination.z;
+        ruleStartingPosition.z = this.translationLayerAnchor.position.z;
         this.nextRule.transform.position = ruleStartingPosition;
 
         Vector3 handStartPosition = this.VisibleHandPosition.position;
@@ -174,8 +173,12 @@ public partial class GameController
 
         float translationDuration = .5f;
 
-        this.nextRule.transform.DOMove(this.playRuleSlots[0].transform.position, this.playRuleAnimationDuration).SetEase(this.playRuleCurve);
-        this.nextRule.transform.DOScale(new Vector3(1.4f, 1.4f, 0), this.playRuleAnimationDuration).SetEase(this.playRuleScaleCurve);
+        Vector3 ruleTrueTargetPosition = this.playRuleSlots[0].transform.position;
+        Vector3 ruleTargetPosition = ruleTrueTargetPosition;
+        ruleTargetPosition.z = this.translationLayerAnchor.position.z;
+
+        this.nextRule.transform.DOMove(ruleTargetPosition, this.playRuleAnimationDuration).SetEase(this.playRuleCurve).OnComplete(()=> this.nextRule.transform.position = ruleTrueTargetPosition);
+        this.nextRule.transform.DOScale(new Vector3(2f, 2f, 1f), this.playRuleAnimationDuration).SetEase(this.playRuleScaleCurve);
 
         this.hideRulesTween = this.RuleHandTransform.DOMove(this.HiddenRuleHandPosition.position, translationDuration);
         this.hideRulesTween.SetEase(Ease.InCubic);
@@ -301,18 +304,21 @@ public partial class GameController
         float timer = 0;
         Vector3 startPosition = this.IntermediateCardAnchor.transform.position;
         Vector3 endPosition = this.playSlots[cardSlotindex].transform.position;
-        endPosition.z -= 3;
+        endPosition.z = this.translationLayerAnchor.position.z;
         startPosition.z = endPosition.z;
+        this.nextPlayedCard.transform.position = startPosition;
 
-        while (timer < this.playCardAnimDuration)
+        if (this.playSlots[cardSlotindex].Card != null)
         {
-            timer = Time.timeSinceLevelLoad - startDate;
-            float progression = timer / this.playCardAnimDuration;
-            this.nextPlayedCard.transform.position = startPosition + (endPosition - startPosition) * this.playCardCurve.Evaluate(progression);
-            this.nextPlayedCard.transform.localScale = Vector3.one * this.playCardScaleCurve.Evaluate(progression);
-
-            yield return null;
+            Vector3 previousCardPosition = this.playSlots[cardSlotindex].Card.transform.position;
+            previousCardPosition.z += 1;
+            this.playSlots[cardSlotindex].Card.transform.position = previousCardPosition;
         }
+
+        Tween cardTransitionTween = this.nextPlayedCard.transform.DOMove(endPosition, this.playCardAnimDuration).SetEase(this.playCardCurve).OnComplete(()=> this.nextPlayedCard.transform.position = this.playSlots[cardSlotindex].transform.position);
+        this.nextPlayedCard.transform.DOScale(new Vector3(2, 2, 1), this.playCardAnimDuration).SetEase(playCardScaleCurve);
+
+        yield return cardTransitionTween.WaitForCompletion();
 
         for (int ruleIndex = 0; ruleIndex < this.playRuleSlots.Length; ++ruleIndex)
         {

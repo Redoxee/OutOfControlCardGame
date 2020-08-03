@@ -58,8 +58,6 @@ public partial class GameController : MonoBehaviour
     private Transform IntermediateCardAnchor = null;
 
     [SerializeField]
-    private Transform rulePreDestination = null;
-    [SerializeField]
     private AnimationCurve ruleSlideCurve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1, 1) });
 
     [SerializeField]
@@ -97,6 +95,9 @@ public partial class GameController : MonoBehaviour
 
     [SerializeField]
     private Tooltip toolTip = null;
+
+    [SerializeField]
+    private Transform translationLayerAnchor = null;
 
     private Rule ruleToPhaseOut = null;
 
