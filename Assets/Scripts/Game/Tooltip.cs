@@ -103,9 +103,9 @@ public class Tooltip : MonoBehaviour
         Vector3 position = target.transform.position;
         position.x += deltaDirection.x * targetWidth * .5f + width * .5f * deltaDirection.x;
         position.y += deltaDirection.y * targetHeight * .5f + height * .5f * deltaDirection.y;
+        this.hidePosition = position;
+        position += new Vector3(deltaDirection.x, deltaDirection.y, 0) * this.targetMargin;
 
-
-        this.hidePosition = position - new Vector3(deltaDirection.x, deltaDirection.y, 0) * this.targetMargin;
         this.transform.position = this.hidePosition;
         this.currentTween = this.transform.DOMove(position, this.transitionDuration).SetEase(Ease.OutCubic).OnKill(() =>
         {

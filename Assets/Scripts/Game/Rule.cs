@@ -31,7 +31,7 @@ public class Rule : BorderComponent
             this.IconRenderer[index].gameObject.SetActive(true);
             this.IconRenderer[index].sprite = sprites[index];
             Vector3 position = this.IconRenderer[index].transform.localPosition;
-            position.x = -halfWidth + (index * this.IconSeparation);
+            position.y = -halfWidth + (index * this.IconSeparation);
             this.IconRenderer[index].transform.localPosition = position;
         }
     }

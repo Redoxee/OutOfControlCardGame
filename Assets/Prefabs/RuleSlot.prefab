@@ -168,8 +168,8 @@ MonoBehaviour:
   scaleMode: 0
   color: {r: 0.59460664, g: 0.9622642, b: 0.9329638, a: 1}
   pivot: 1
-  width: 3.22
-  height: 1.62
+  width: 1.82
+  height: 3.62
   type: 1
   cornerRadiusMode: 0
   cornerRadii: {x: 0.14, y: 0.14, z: 0.14, w: 0.14}
@@ -272,8 +272,8 @@ MonoBehaviour:
   scaleMode: 0
   color: {r: 0, g: 0, b: 0, a: 1}
   pivot: 1
-  width: 3.36
-  height: 1.76
+  width: 1.96
+  height: 3.7599998
   type: 3
   cornerRadiusMode: 0
   cornerRadii: {x: 0.14, y: 0.14, z: 0.14, w: 0.14}
@@ -353,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5280413087065350909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: -1.77, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5860788351556713696}
@@ -437,8 +437,8 @@ MonoBehaviour:
   scaleMode: 0
   color: {r: 1, g: 1, b: 1, a: 1}
   pivot: 1
-  width: 3.32
-  height: 1.72
+  width: 1.9200001
+  height: 3.7199998
   type: 3
   cornerRadiusMode: 0
   cornerRadii: {x: 0.14, y: 0.14, z: 0.14, w: 0.14}
@@ -631,7 +631,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6343899157950826151}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: -1.77, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4208143477309362651}
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   back: {fileID: 101347223476749597}
-  backSize: {x: 3.22, y: 1.62}
+  backSize: {x: 1.82, y: 3.62}
   backColor: {r: 0.59460664, g: 0.9622642, b: 0.9329638, a: 1}
   border: {fileID: 3975779221084641783}
   borderThickness: 0.1
@@ -774,5 +774,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.22, y: 2}
+  m_Size: {x: 1.82, y: 3.62}
   m_EdgeRadius: 0

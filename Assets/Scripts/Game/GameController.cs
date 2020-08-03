@@ -171,7 +171,7 @@ public partial class GameController : MonoBehaviour
                 return;
             }
 
-            this.toolTip.ShowTooltip(ruleSlot.Rule.Data.ToString(), ruleSlot.MainRectangle, Tooltip.AnchorPosition.Right, 2);
+            this.toolTip.ShowTooltip(ruleSlot.Rule.Data.ToString(), ruleSlot.MainRectangle, Tooltip.AnchorPosition.Top, 2);
         }
         else
         {
