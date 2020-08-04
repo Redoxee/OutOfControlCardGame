@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class RuleDefinition : ScriptableObject
+public abstract class RuleDefinition : AMG.Data
 {
     [SerializeField]
     private Sprite mainSprite = null;

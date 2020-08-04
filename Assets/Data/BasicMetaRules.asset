@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f60f715f3bdb7b42a84d91105343b57, type: 3}
+  m_Name: BasicMetaRules
+  m_EditorClassIdentifier: 
+  RuleDeck:
+  - {fileID: 11400000, guid: 235f6d826d322ed419c8bc036a65a06a, type: 2}
+  - {fileID: 11400000, guid: 12d3f0ee7f03ad34c92184744393913b, type: 2}
+  - {fileID: 11400000, guid: f5fbba201acc39b459922dba8e7f4d70, type: 2}
+  - {fileID: 11400000, guid: c330d06f36250914993c930a2b9a057a, type: 2}
+  - {fileID: 11400000, guid: 40f72615cc1a2dd47b90b5526daac3d5, type: 2}
+  - {fileID: 11400000, guid: 2c8eddaf3bb77dc4786b38b4872abea4, type: 2}
+  - {fileID: 11400000, guid: e74b8c1296f92934cace0654d004266c, type: 2}
+  - {fileID: 11400000, guid: 1bd297787241e61449767f2f9f51cf05, type: 2}
+  - {fileID: 11400000, guid: 56ebb12368ccf314eaccb8d98c093c2d, type: 2}
+  - {fileID: 11400000, guid: 49a9de218bfa69642991f042424092b9, type: 2}
+  - {fileID: 11400000, guid: 3a72ac0afe4b7e64e841601f0b056ac2, type: 2}
+  - {fileID: 11400000, guid: 30789fe04b88e854188675e218de3214, type: 2}
+  - {fileID: 11400000, guid: 9df9f74c71622a94692991ff0ca37adf, type: 2}
+  CardDeck:
+  - Value: 1
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 2
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 3
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 4
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 5
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 6
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 7
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 8
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 9
+    sigil: 1
+    NumberOfCopyInDeck: 1
+  - Value: 1
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 2
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 3
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 4
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 5
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 6
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 7
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 8
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 9
+    sigil: 2
+    NumberOfCopyInDeck: 1
+  - Value: 1
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 2
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 3
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 4
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 5
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 6
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 7
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 8
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 9
+    sigil: 4
+    NumberOfCopyInDeck: 1
+  - Value: 1
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 2
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 3
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 4
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 5
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 6
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 7
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 8
+    sigil: 8
+    NumberOfCopyInDeck: 1
+  - Value: 9
+    sigil: 8
+    NumberOfCopyInDeck: 1

@@ -15,10 +15,8 @@ public class MainManager : MonoBehaviour
 
     public int finalScore = 0;
     public GameSettings GameSettings;
-    [SerializeField]
-    private int GameSceneBuildIndex = 1;
 
-    [SerializeField]
+    private int GameSceneBuildIndex = 1;
     private int EndGameSceneIndex = 2;
 
     public static void LoadMainSceneIfNecessary()
