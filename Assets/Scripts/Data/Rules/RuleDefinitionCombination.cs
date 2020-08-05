@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-class RuleDefinitionCombination : RuleDefinition
+public class RuleDefinitionCombination : RuleDefinition
 {
     public RuleDefinition[] SubRules = new RuleDefinition[0];
 

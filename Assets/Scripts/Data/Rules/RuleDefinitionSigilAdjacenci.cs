@@ -1,5 +1,5 @@
 ﻿
-class RuleDefinitionSigilAdjacenci : RuleDefinition
+public class RuleDefinitionSigilAdjacenci : RuleDefinition
 {
     public Sigil TargetSigil = Sigil.Diamond;
 

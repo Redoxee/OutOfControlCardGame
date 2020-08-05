@@ -1,5 +1,5 @@
 ﻿
-class RuleDefinitionGrid : RuleDefinition
+public class RuleDefinitionGrid : RuleDefinition
 {
     public bool[] AllowedCells = new bool[9];
 
