@@ -26,6 +26,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a72ac0afe4b7e64e841601f0b056ac2, type: 2}
   - {fileID: 11400000, guid: 30789fe04b88e854188675e218de3214, type: 2}
   - {fileID: 11400000, guid: 9df9f74c71622a94692991ff0ca37adf, type: 2}
+  RuleWaves:
+  - RuleDefintions:
+    - {fileID: 11400000, guid: 2c8eddaf3bb77dc4786b38b4872abea4, type: 2}
   CardDeck:
   - Value: 1
     sigil: 1
