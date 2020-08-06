@@ -393,8 +393,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 1bd297787241e61449767f2f9f51cf05, type: 2}
     - {fileID: 11400000, guid: 56ebb12368ccf314eaccb8d98c093c2d, type: 2}
     - {fileID: 11400000, guid: 49a9de218bfa69642991f042424092b9, type: 2}
-  GameSceneBuildIndex: 1
-  EndGameSceneIndex: 2
 --- !u!4 &1445692826
 Transform:
   m_ObjectHideFlags: 0

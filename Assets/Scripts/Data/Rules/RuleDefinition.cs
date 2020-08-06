@@ -6,6 +6,9 @@ using UnityEngine;
 public abstract class RuleDefinition : AMG.Data
 {
     [SerializeField]
+    public GameObject IllustrationPrefab = null;
+
+    [SerializeField]
     private Sprite mainSprite = null;
 
     [SerializeField]
