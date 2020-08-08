@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1d3acb552d9f24fa6ed4489a884e9d, type: 3}
+  m_Name: antislash_Row_1
+  m_EditorClassIdentifier: 
+  IllustrationPrefab: {fileID: 1809660647935409756, guid: 20cf8d83d6601e0428eb2eb1e3baf132,
+    type: 3}
+  Description: 
+  AllowedCells: 000000010001010100

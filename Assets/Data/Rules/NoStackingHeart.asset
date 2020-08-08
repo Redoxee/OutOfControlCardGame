@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fd8ea3553470c489db236f142ab853, type: 3}
   m_Name: NoStackingHeart
   m_EditorClassIdentifier: 
-  mainSprite: {fileID: 21300000, guid: e49d69a0a56a59846a97941142c63093, type: 3}
+  IllustrationPrefab: {fileID: 2086568313857153556, guid: 1016b6a141a42234ea22da9c250d6fd4,
+    type: 3}
   Description: Staking Hearts Prohibited
   topSigil: 13
   bottomSigils: 2

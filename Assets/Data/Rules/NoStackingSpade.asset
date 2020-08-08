@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fd8ea3553470c489db236f142ab853, type: 3}
   m_Name: NoStackingSpade
   m_EditorClassIdentifier: 
-  mainSprite: {fileID: 21300000, guid: 7af55b8e61ab8e047b7fa19e45da19ab, type: 3}
+  IllustrationPrefab: {fileID: 2372538624943109807, guid: 0621aabd96d4fc1498122ba362982223,
+    type: 3}
   Description: Staking Spades Prohibited
   topSigil: 7
   bottomSigils: 8

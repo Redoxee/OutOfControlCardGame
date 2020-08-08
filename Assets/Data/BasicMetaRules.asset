@@ -13,22 +13,44 @@ MonoBehaviour:
   m_Name: BasicMetaRules
   m_EditorClassIdentifier: 
   RuleDeck:
-  - {fileID: 11400000, guid: 235f6d826d322ed419c8bc036a65a06a, type: 2}
-  - {fileID: 11400000, guid: 12d3f0ee7f03ad34c92184744393913b, type: 2}
-  - {fileID: 11400000, guid: f5fbba201acc39b459922dba8e7f4d70, type: 2}
-  - {fileID: 11400000, guid: c330d06f36250914993c930a2b9a057a, type: 2}
-  - {fileID: 11400000, guid: 40f72615cc1a2dd47b90b5526daac3d5, type: 2}
-  - {fileID: 11400000, guid: 2c8eddaf3bb77dc4786b38b4872abea4, type: 2}
-  - {fileID: 11400000, guid: e74b8c1296f92934cace0654d004266c, type: 2}
-  - {fileID: 11400000, guid: 1bd297787241e61449767f2f9f51cf05, type: 2}
-  - {fileID: 11400000, guid: 56ebb12368ccf314eaccb8d98c093c2d, type: 2}
-  - {fileID: 11400000, guid: 49a9de218bfa69642991f042424092b9, type: 2}
-  - {fileID: 11400000, guid: 3a72ac0afe4b7e64e841601f0b056ac2, type: 2}
-  - {fileID: 11400000, guid: 30789fe04b88e854188675e218de3214, type: 2}
-  - {fileID: 11400000, guid: 9df9f74c71622a94692991ff0ca37adf, type: 2}
+  - {fileID: 11400000, guid: e1628734d48a91849b3051120cf015d8, type: 2}
+  - {fileID: 11400000, guid: 8fe680c2a9c39ee4b869e7eed09a6f55, type: 2}
+  - {fileID: 11400000, guid: 651dd83de4b1ef44dae4baf315145d4f, type: 2}
+  - {fileID: 11400000, guid: dedddec6efa1cd044abdc9cc91511841, type: 2}
+  - {fileID: 11400000, guid: 1a8a0a11db1dca946bade17e77fa4591, type: 2}
+  - {fileID: 11400000, guid: 81c0dfc8cca02bb4c8e73d1046ff7ffb, type: 2}
+  - {fileID: 11400000, guid: b01a39d19ae1cf64eb53ecf7027085b0, type: 2}
+  - {fileID: 11400000, guid: 34e5f2c252828544393f083adf80aa1f, type: 2}
   RuleWaves:
   - RuleDefintions:
     - {fileID: 11400000, guid: 2c8eddaf3bb77dc4786b38b4872abea4, type: 2}
+  - RuleDefintions:
+    - {fileID: 11400000, guid: e74b8c1296f92934cace0654d004266c, type: 2}
+    - {fileID: 11400000, guid: 1bd297787241e61449767f2f9f51cf05, type: 2}
+    - {fileID: 11400000, guid: 56ebb12368ccf314eaccb8d98c093c2d, type: 2}
+    - {fileID: 11400000, guid: 49a9de218bfa69642991f042424092b9, type: 2}
+  - RuleDefintions:
+    - {fileID: 11400000, guid: 1fb14f3ffb5764a449210378a06b6135, type: 2}
+    - {fileID: 11400000, guid: 7bb53be1641060442b94d7b9f2e043f8, type: 2}
+    - {fileID: 11400000, guid: 22bf3992078b79942aee5ac8435ea9c7, type: 2}
+    - {fileID: 11400000, guid: d5877db01184a5d4880da30251fa8aee, type: 2}
+    - {fileID: 11400000, guid: 657d07b81dd972b439c2dddaa0ec7f4f, type: 2}
+    - {fileID: 11400000, guid: a086366991c8f3a42b0ec8f1323561a4, type: 2}
+    - {fileID: 11400000, guid: 7ffc1e0a4617fec48bd5f8f7a6de28f3, type: 2}
+    - {fileID: 11400000, guid: bd96e1f35719ccf46803f410d8ccadc1, type: 2}
+    - {fileID: 11400000, guid: f56a89da04ace8c4e9b3a65977eb18ea, type: 2}
+    - {fileID: 11400000, guid: 5543606ea16d2f94586b3d2ed31d914b, type: 2}
+    - {fileID: 11400000, guid: 723fb9710d845f94b94682284e941379, type: 2}
+    - {fileID: 11400000, guid: ce2acb20b5a92e6419865d1673100165, type: 2}
+    - {fileID: 11400000, guid: 0dec496c3094e1c4e9f5c72f37654ff1, type: 2}
+    - {fileID: 11400000, guid: 465bf806bd24d174c9930c44082e60b1, type: 2}
+    - {fileID: 11400000, guid: 5785ebac7f377a644b823ef227c6dd52, type: 2}
+    - {fileID: 11400000, guid: 1329499ba734e77459abae01cd71efb5, type: 2}
+    - {fileID: 11400000, guid: 9c823cd49f6a1624a8de1d6694ec39be, type: 2}
+    - {fileID: 11400000, guid: 44aecac83d027554f8f72f610644590d, type: 2}
+    - {fileID: 11400000, guid: 102d35162384a5c4ba99e43aeb5471f9, type: 2}
+    - {fileID: 11400000, guid: 34bf9ba11652e8e48bc2dd72b25e95ce, type: 2}
+    - {fileID: 11400000, guid: 4c44ff136ffb5414989062c338d615db, type: 2}
   CardDeck:
   - Value: 1
     sigil: 1

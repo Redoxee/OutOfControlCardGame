@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1d3acb552d9f24fa6ed4489a884e9d, type: 3}
+  m_Name: GridRules_Col_3_row2
+  m_EditorClassIdentifier: 
+  IllustrationPrefab: {fileID: 8807852426889695983, guid: a82bec6a819267c459e890e20c0bf3c8,
+    type: 3}
+  Description: 
+  AllowedCells: 010101010100010101

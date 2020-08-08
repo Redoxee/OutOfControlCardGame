@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fd8ea3553470c489db236f142ab853, type: 3}
   m_Name: NoStackingClover
   m_EditorClassIdentifier: 
-  mainSprite: {fileID: 21300000, guid: a5cdf3446e6c0e3429efaad191288c0d, type: 3}
+  IllustrationPrefab: {fileID: 5319558945069081298, guid: c7bf7f233aba02049a6ace7fc5f51686,
+    type: 3}
   Description: Staking Clovers Prohibited
   topSigil: 11
   bottomSigils: 4

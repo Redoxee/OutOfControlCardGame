@@ -378,21 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalScore: 0
-  GameSettings:
-    GameRules:
-    - {fileID: 11400000, guid: 235f6d826d322ed419c8bc036a65a06a, type: 2}
-    - {fileID: 11400000, guid: 12d3f0ee7f03ad34c92184744393913b, type: 2}
-    - {fileID: 11400000, guid: f5fbba201acc39b459922dba8e7f4d70, type: 2}
-    - {fileID: 11400000, guid: c330d06f36250914993c930a2b9a057a, type: 2}
-    - {fileID: 11400000, guid: 40f72615cc1a2dd47b90b5526daac3d5, type: 2}
-    - {fileID: 11400000, guid: 3a72ac0afe4b7e64e841601f0b056ac2, type: 2}
-    - {fileID: 11400000, guid: 30789fe04b88e854188675e218de3214, type: 2}
-    - {fileID: 11400000, guid: 9df9f74c71622a94692991ff0ca37adf, type: 2}
-    - {fileID: 11400000, guid: 2c8eddaf3bb77dc4786b38b4872abea4, type: 2}
-    - {fileID: 11400000, guid: e74b8c1296f92934cace0654d004266c, type: 2}
-    - {fileID: 11400000, guid: 1bd297787241e61449767f2f9f51cf05, type: 2}
-    - {fileID: 11400000, guid: 56ebb12368ccf314eaccb8d98c093c2d, type: 2}
-    - {fileID: 11400000, guid: 49a9de218bfa69642991f042424092b9, type: 2}
+  GameConfiguration: {fileID: 11400000, guid: 7b0f112a494c5fd4791d209a4b81df2d, type: 2}
 --- !u!4 &1445692826
 Transform:
   m_ObjectHideFlags: 0

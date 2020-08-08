@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fd8ea3553470c489db236f142ab853, type: 3}
   m_Name: NoStackingDiamond
   m_EditorClassIdentifier: 
-  mainSprite: {fileID: 21300000, guid: 7fab07916dd0b534ebea0f69c74dc71e, type: 3}
+  IllustrationPrefab: {fileID: 5142863008231252228, guid: ed710bba0a50a1944abf13388ebe527e,
+    type: 3}
   Description: Staking Diamonds Prohibited
   topSigil: 14
   bottomSigils: 1
