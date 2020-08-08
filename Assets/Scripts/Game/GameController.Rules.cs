@@ -2,61 +2,52 @@
 
 public partial class GameController
 {
-    private List<RuleDefinition> combinedRules = new List<RuleDefinition>();
+    private List<List<RuleDefinition>> wavesRules = new List<List<RuleDefinition>>();
+
     private void InitializeRuleData()
     {
-        RuleDefinition[] definitions = MainManager.Instance.GameSettings.GameRules;
+        RuleDefinition[] definitions = MainManager.Instance.GameConfiguration.RuleDeck;
         this.availableRules.AddRange(definitions);
 
-        this.GenerateCombinedRules();
-    }
-
-    private void GenerateCombinedRules()
-    {
-        int baseNumberOfRules = this.availableRules.Count;
-        for (int index = 0; index < (baseNumberOfRules - 1); ++index)
+        this.wavesRules.Clear();
+        var wavesDefintion = MainManager.Instance.GameConfiguration.RuleWaves;
+        for (int waveIndex = 0; waveIndex < wavesDefintion.Length; ++waveIndex)
         {
-            for (int jndex = index + 1; jndex < baseNumberOfRules; ++jndex)
-            {
-                if (this.availableRules[index] is RuleDefinitionNoConstraint || 
-                    this.availableRules[jndex] is RuleDefinitionNoConstraint)
-                {
-                    continue;
-                }
-
-                RuleDefinitionCombination combinationRule = UnityEngine.ScriptableObject.CreateInstance<RuleDefinitionCombination>();
-                combinationRule.SubRules = new RuleDefinition[]
-                    {
-                        this.availableRules[index],
-                        this.availableRules[jndex],
-                    };
-
-                this.combinedRules.Add(combinationRule);
-            }
+            List<RuleDefinition> wave = new List<RuleDefinition>();
+            wave.AddRange(wavesDefintion[waveIndex].RuleDefintions);
+            this.wavesRules.Add(wave);
         }
     }
 
-    private void TransferCombinedRules()
+    private void TransferWaveRule()
     {
-        int numberOfCombinedRules = this.combinedRules.Count;
-        for (int index = 0; index < numberOfCombinedRules; ++index)
-        {
-            this.availableRules.Add(this.combinedRules[index]);
-        }
-
-        this.combinedRules.Clear();
-    }
-
-    private void TransferOneCombinedRule()
-    {
-        if (this.combinedRules.Count == 0)
+        if (this.wavesRules.Count == 0)
         {
             return;
         }
 
-        int selectedIndex = UnityEngine.Random.Range(0, this.combinedRules.Count);
-        RuleDefinition data = this.combinedRules[selectedIndex];
-        this.combinedRules.RemoveAt(selectedIndex);
-        this.availableRules.Add(data);
+        List<RuleDefinition> wave = this.wavesRules[0];
+        this.availableRules.AddRange(wave);
+        this.wavesRules.RemoveAt(0);
+    }
+
+    private void TransferOneCombinedRule()
+    {
+        if (this.wavesRules.Count == 0)
+        {
+            return;
+        }
+
+        List<RuleDefinition> wave = this.wavesRules[0];
+        if (wave.Count > 0)
+        {
+            this.availableRules.Add(wave[0]);
+            wave.RemoveAt(0);
+        }
+
+        if (wave.Count == 0)
+        {
+            this.wavesRules.RemoveAt(0);
+        }
     }
 }

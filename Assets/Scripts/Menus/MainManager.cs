@@ -14,7 +14,7 @@ public class MainManager : MonoBehaviour
     }
 
     public int finalScore = 0;
-    public GameSettings GameSettings;
+    public MetaRules GameConfiguration = null;
 
     private int GameSceneBuildIndex = 1;
     private int EndGameSceneIndex = 2;

@@ -230,18 +230,14 @@ public partial class GameController : MonoBehaviour
     private void InitializeCardData()
     {
         this.availableCards.Clear();
-        for (int index = 0; index < 10; ++index)
-        {
-            for (int sigilIndex = 0; sigilIndex < 4; ++sigilIndex)
-            {
-                Sigil sigil = (Sigil)(1 << sigilIndex);
-                CardData cData = new CardData()
-                {
-                    NumberValue = index + 1,
-                    Sigil = sigil,
-                };
 
-                this.availableCards.Add(cData);
+        for (int index = 0; index < MainManager.Instance.GameConfiguration.CardDeck.Length; ++index)
+        {
+            MetaRules.DeckCard deckCard = MainManager.Instance.GameConfiguration.CardDeck[index];
+            for (int iteration = 0; iteration < deckCard.NumberOfCopyInDeck; ++iteration)
+            {
+                CardData cardData = new CardData { NumberValue = deckCard.Value, Sigil = deckCard.sigil};
+                this.availableCards.Add(cardData);
             }
         }
     }

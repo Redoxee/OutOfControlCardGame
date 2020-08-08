@@ -4,9 +4,46 @@ using UnityEngine;
 
 public class RulesGenerator : MonoBehaviour
 {
-    [UnityEditor.MenuItem("Asset/CreateComplexeRules")]
+    [UnityEditor.MenuItem("Asset/CreateGridRules")]
     public static void GenerateComplexeGridRules()
     {
+        for (int i = 0; i < 3; ++i)
+        {
+
+            RuleDefinitionGrid rowRule = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
+            RuleDefinitionGrid colRule = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
+            for (int j = 0; j < 9; ++j)
+            {
+                rowRule.AllowedCells[j] = (j / 3 != i);
+                colRule.AllowedCells[j] = (j % 3 != i);
+            }
+
+            string rowRuleName = $"GridRules_Row_{i + 1}";
+            RulesGenerator.CreateAssetsFromGridRule("GridRules/Simple",rowRule, rowRuleName);
+
+            string colRuleName = $"GridRules_Col_{i + 1}";
+            RulesGenerator.CreateAssetsFromGridRule("GridRules/Simple", colRule, colRuleName);
+        }
+
+        RuleDefinitionGrid antiSlash = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
+        antiSlash.AllowedCells = new bool[] 
+        {
+            false, true, true,
+            true, false, true,
+            true, true, false,
+        };
+
+        RuleDefinitionGrid slashRule = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
+        slashRule.AllowedCells = new bool[]
+        {
+            true, true, false,
+            true, false, true,
+            false, true, true,
+        };
+
+        RulesGenerator.CreateAssetsFromGridRule("GridRules/Simple", antiSlash, "GridRules_AntiSlash");
+        RulesGenerator.CreateAssetsFromGridRule("GridRules/Simple", slashRule, "GridRules_Slash");
+
         for (int x = 0; x < 3; ++x)
         {
             for (int y = 0; y < 3; ++y)
@@ -16,12 +53,12 @@ public class RulesGenerator : MonoBehaviour
                 {
                     for (int j = 0; j < 3; ++j)
                     {
-                        gridRule.AllowedCells[i + j * 3] = (i == x || j == y);
+                        gridRule.AllowedCells[i + j * 3] = (i != x || j != y);
                     }
                 }
 
                 string ruleName = $"GridRules_Col_{x + 1}_row{y + 1}";
-                RulesGenerator.CreateAssetsFromGridRule(gridRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", gridRule, ruleName);
             }
         }
 
@@ -29,68 +66,83 @@ public class RulesGenerator : MonoBehaviour
         {
             {
                 RuleDefinitionGrid slashColRule = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
-                slashColRule.AllowedCells[2] = true;
-                slashColRule.AllowedCells[4] = true;
-                slashColRule.AllowedCells[6] = true;
-                slashColRule.AllowedCells[i] = true;
-                slashColRule.AllowedCells[i + 3] = true;
-                slashColRule.AllowedCells[i + 6] = true;
+                slashColRule.AllowedCells = new bool[]
+                {
+                    true, true, false,
+                    true, false, true,
+                    false, true, true,
+                };
+                slashColRule.AllowedCells[i] = false;
+                slashColRule.AllowedCells[i + 3] = false;
+                slashColRule.AllowedCells[i + 6] = false;
 
                 string ruleName = $"slash_Col_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule(slashColRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", slashColRule, ruleName);
             }
 
             {
                 RuleDefinitionGrid slashRowRule = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
-                slashRowRule.AllowedCells[2] = true;
-                slashRowRule.AllowedCells[4] = true;
-                slashRowRule.AllowedCells[6] = true;
-                slashRowRule.AllowedCells[i * 3] = true;
-                slashRowRule.AllowedCells[i * 3 + 1] = true;
-                slashRowRule.AllowedCells[i * 3 + 2] = true;
+                slashRowRule.AllowedCells = new bool[]
+                {
+                    true, true, false,
+                    true, false, true,
+                    false, true, true,
+                };
+
+                slashRowRule.AllowedCells[i * 3] = false;
+                slashRowRule.AllowedCells[i * 3 + 1] = false;
+                slashRowRule.AllowedCells[i * 3 + 2] = false;
 
                 string ruleName = $"slash_Row_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule(slashRowRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", slashRowRule, ruleName);
             }
 
             {
                 RuleDefinitionGrid antislashColRule = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
-                antislashColRule.AllowedCells[0] = true;
-                antislashColRule.AllowedCells[4] = true;
-                antislashColRule.AllowedCells[8] = true;
-                antislashColRule.AllowedCells[i] = true;
-                antislashColRule.AllowedCells[i + 3] = true;
-                antislashColRule.AllowedCells[i + 6] = true;
+                antislashColRule.AllowedCells = new bool[]
+                {
+                    false, true, true,
+                    true, false, true,
+                    true, true, false,
+                };
+
+                antislashColRule.AllowedCells[i] = false;
+                antislashColRule.AllowedCells[i + 3] = false;
+                antislashColRule.AllowedCells[i + 6] = false;
                 
                 string ruleName = $"antislash_Col_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule(antislashColRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", antislashColRule, ruleName);
             }
 
             { 
                 RuleDefinitionGrid antislashRowRule = ScriptableObject.CreateInstance<RuleDefinitionGrid>();
-                antislashRowRule.AllowedCells[0] = true;
-                antislashRowRule.AllowedCells[4] = true;
-                antislashRowRule.AllowedCells[8] = true;
-                antislashRowRule.AllowedCells[i * 3] = true;
-                antislashRowRule.AllowedCells[i * 3 + 1] = true;
-                antislashRowRule.AllowedCells[i * 3 + 2] = true;
+                antislashRowRule.AllowedCells = new bool[]
+                {
+                    false, true, true,
+                    true, false, true,
+                    true, true, false,
+                };
+
+                antislashRowRule.AllowedCells[i * 3] = false;
+                antislashRowRule.AllowedCells[i * 3 + 1] = false;
+                antislashRowRule.AllowedCells[i * 3 + 2] = false;
 
                 string ruleName = $"antislash_Row_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule(antislashRowRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", antislashRowRule, ruleName);
             }
         }
 
         UnityEditor.AssetDatabase.SaveAssets();
     }
 
-    private static void CreateAssetsFromGridRule(RuleDefinitionGrid gridRule, string ruleName)
+    private static void CreateAssetsFromGridRule(string ruleFolder, RuleDefinitionGrid gridRule, string ruleName)
     {
         GameObject prefabRef = (GameObject)UnityEditor.AssetDatabase.LoadMainAssetAtPath("Assets/Prefabs/GridRuleRepresentation.prefab");
         GameObject instanceRoot = (GameObject)GameObject.Instantiate(prefabRef);
 
         for (int i = 8; i >= 0; --i)
         {
-            if (!gridRule.AllowedCells[i])
+            if (gridRule.AllowedCells[i])
             {
                 Transform cell = instanceRoot.transform.GetChild(i).GetChild(0);
                 GameObject.DestroyImmediate(cell.gameObject);
@@ -104,7 +156,7 @@ public class RulesGenerator : MonoBehaviour
         prefabRef = (GameObject)UnityEditor.AssetDatabase.LoadMainAssetAtPath(prefabPath);
         gridRule.IllustrationPrefab = prefabRef;
 
-        string rulePath = $"Assets/Data/Rules/ComplexeGriRules/{ruleName}.asset";
+        string rulePath = $"Assets/Data/Rules/{ruleFolder}/{ruleName}.asset";
         UnityEditor.AssetDatabase.CreateAsset(gridRule, rulePath);
         UnityEditor.EditorUtility.SetDirty(gridRule);
     }

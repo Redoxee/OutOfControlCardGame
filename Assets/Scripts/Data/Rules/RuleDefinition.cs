@@ -9,12 +9,10 @@ public abstract class RuleDefinition : AMG.Data
     public GameObject IllustrationPrefab = null;
 
     [SerializeField]
-    private Sprite mainSprite = null;
-
-    [SerializeField]
     private string Description = string.Empty;
-
-    protected Sprite[] spriteArray;
+    
+    [System.NonSerialized]
+    protected GameObject[] IllustrationPrefabs = null;
 
     public abstract bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y);
 
@@ -34,8 +32,13 @@ public abstract class RuleDefinition : AMG.Data
         return this.Description;
     }
 
-    public virtual Sprite[] GetRuleSprites()
+    public virtual GameObject[] GetIllustrationPrefabs()
     {
-        return new Sprite[] { this.mainSprite };
+        if (this.IllustrationPrefabs == null)
+        {
+            this.IllustrationPrefabs = new GameObject[] { this.IllustrationPrefab };
+        }
+
+        return this.IllustrationPrefabs;
     }
 }

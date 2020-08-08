@@ -6,6 +6,7 @@ public class RuleDefinitionCombination : RuleDefinition
     public RuleDefinition[] SubRules = new RuleDefinition[0];
 
     private System.Collections.Generic.List<Sprite> workingSpriteList = new System.Collections.Generic.List<Sprite>();
+    private System.Collections.Generic.List<GameObject> workingGameObjectList = new System.Collections.Generic.List<GameObject>();
 
     public override bool IsSlotAllowed(ref CardData card, CardSlot[] cardSlots, int x, int y)
     {
@@ -35,18 +36,23 @@ public class RuleDefinitionCombination : RuleDefinition
         return builder.ToString();
     }
 
-    public override Sprite[] GetRuleSprites()
+    public override GameObject[] GetIllustrationPrefabs()
     {
-        this.workingSpriteList.Clear();
-        foreach (RuleDefinition rule in this.SubRules)
+        if (this.IllustrationPrefabs == null)
         {
-            Sprite[] sprites = rule.GetRuleSprites();
-            foreach (Sprite sprite in sprites)
+            this.workingGameObjectList.Clear();
+            foreach (RuleDefinition rule in this.SubRules)
             {
-                this.workingSpriteList.Add(sprite);
+                GameObject[] ruleIllustrations = rule.GetIllustrationPrefabs();
+                foreach (GameObject illustration in ruleIllustrations)
+                {
+                    this.workingGameObjectList.Add(illustration);
+                }
             }
+
+            this.IllustrationPrefabs = this.workingGameObjectList.ToArray();
         }
 
-        return this.workingSpriteList.ToArray();
+        return this.IllustrationPrefabs;
     }
 }

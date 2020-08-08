@@ -7,8 +7,11 @@ public class Rule : BorderComponent
     [System.NonSerialized]
     public RuleDefinition Data = null;
 
-    [SerializeField]
-    private SpriteRenderer[] IconRenderer = null;
+    [UnityEngine.SerializeField]
+    private Transform IllustrationRoot = null;
+
+    private Transform[] IllustrationAnchors = new Transform[0];
+
     [SerializeField]
     private float IconSeparation = 1;
 
@@ -16,23 +19,23 @@ public class Rule : BorderComponent
     {
         this.Data = rule;
 
-        Sprite[] sprites = rule.GetRuleSprites();
-
-        float halfWidth = this.IconSeparation * (sprites.Length - 1) / 2;
-
-        for (int index = 0; index < this.IconRenderer.Length; ++index)
+        GameObject[] illustrationPrefabs = rule.GetIllustrationPrefabs();
+        for (int index = 0; index < this.IllustrationAnchors.Length; ++index)
         {
-            if (index >= sprites.Length)
-            {
-                this.IconRenderer[index].gameObject.SetActive(false);
-                continue;
-            }
+            UnityEngine.GameObject.Destroy(this.IllustrationAnchors[index].gameObject);
+        }
 
-            this.IconRenderer[index].gameObject.SetActive(true);
-            this.IconRenderer[index].sprite = sprites[index];
-            Vector3 position = this.IconRenderer[index].transform.localPosition;
+        System.Array.Resize(ref this.IllustrationAnchors, illustrationPrefabs.Length);
+
+        float halfWidth = this.IconSeparation * (illustrationPrefabs.Length - 1) / 2;
+
+        for (int index = 0; index < illustrationPrefabs.Length; ++index)
+        {
+            UnityEngine.GameObject ruleIllustration = UnityEngine.GameObject.Instantiate(illustrationPrefabs[index], this.IllustrationRoot);
+
+            Vector3 position = Vector3.zero;
             position.y = -halfWidth + (index * this.IconSeparation);
-            this.IconRenderer[index].transform.localPosition = position;
+            ruleIllustration.transform.localPosition = position;
         }
     }
 }
