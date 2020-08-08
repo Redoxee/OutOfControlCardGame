@@ -9,7 +9,7 @@ public abstract class RuleDefinition : AMG.Data
     public GameObject IllustrationPrefab = null;
 
     [SerializeField]
-    private string Description = string.Empty;
+    public string Description = string.Empty;
     
     [System.NonSerialized]
     protected GameObject[] IllustrationPrefabs = null;

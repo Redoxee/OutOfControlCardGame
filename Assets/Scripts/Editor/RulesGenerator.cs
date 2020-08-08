@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class RulesGenerator : MonoBehaviour
 {
+    private static System.Text.StringBuilder workingStringBuilder = new System.Text.StringBuilder();
+
     [UnityEditor.MenuItem("Asset/CreateGridRules")]
     public static void GenerateComplexeGridRules()
     {
+        RulesGenerator.workingStringBuilder.Clear();
+
         for (int i = 0; i < 3; ++i)
         {
 
@@ -133,6 +137,12 @@ public class RulesGenerator : MonoBehaviour
         }
 
         UnityEditor.AssetDatabase.SaveAssets();
+
+        TextEditor te = new TextEditor();
+        te.text = RulesGenerator.workingStringBuilder.ToString();
+        te.SelectAll();
+        te.Copy();
+        Debug.Log($"Copied {RulesGenerator.workingStringBuilder.ToString()}");
     }
 
     private static void CreateAssetsFromGridRule(string ruleFolder, RuleDefinitionGrid gridRule, string ruleName)
@@ -155,9 +165,12 @@ public class RulesGenerator : MonoBehaviour
 
         prefabRef = (GameObject)UnityEditor.AssetDatabase.LoadMainAssetAtPath(prefabPath);
         gridRule.IllustrationPrefab = prefabRef;
+        gridRule.Description = $"%{ruleName}";
 
         string rulePath = $"Assets/Data/Rules/{ruleFolder}/{ruleName}.asset";
         UnityEditor.AssetDatabase.CreateAsset(gridRule, rulePath);
         UnityEditor.EditorUtility.SetDirty(gridRule);
+
+        RulesGenerator.workingStringBuilder.Append($"%{ruleName}\n");
     }
 }
