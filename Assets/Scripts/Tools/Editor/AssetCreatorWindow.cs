@@ -10,7 +10,7 @@ namespace AMG
     {
         List<System.Type> rulesDefintionTypes = new List<System.Type>();
 
-        [UnityEditor.MenuItem("Asset/DataCreation")]
+        [UnityEditor.MenuItem("Tools/DataCreation")]
         public static void OpenRuleCreationWindow()
         {
             AssetCreatorWindow window = (AssetCreatorWindow)EditorWindow.GetWindow(typeof(AssetCreatorWindow));

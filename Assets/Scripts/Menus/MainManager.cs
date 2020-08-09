@@ -13,8 +13,12 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public int finalScore = 0;
     public MetaRules GameConfiguration = null;
+
+    [System.NonSerialized]
+    public int finalScore = 0;
+    [System.NonSerialized]
+    public LocalizationManager LocalizationManager = null;
 
     private int GameSceneBuildIndex = 1;
     private int EndGameSceneIndex = 2;
@@ -43,6 +47,8 @@ public class MainManager : MonoBehaviour
     private void Awake()
     {
         MainManager.instance = this;
+
+        this.LocalizationManager = this.transform.GetComponentInChildren<LocalizationManager>();
 
         bool isGameSceneLoaded = false;
         int numberOfScene = UnityEngine.SceneManagement.SceneManager.sceneCount;

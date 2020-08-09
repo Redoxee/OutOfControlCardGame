@@ -6,7 +6,7 @@ public class RulesGenerator : MonoBehaviour
 {
     private static System.Text.StringBuilder workingStringBuilder = new System.Text.StringBuilder();
 
-    [UnityEditor.MenuItem("Asset/CreateGridRules")]
+    [UnityEditor.MenuItem("Tools/CreateGridRules")]
     public static void GenerateComplexeGridRules()
     {
         RulesGenerator.workingStringBuilder.Clear();

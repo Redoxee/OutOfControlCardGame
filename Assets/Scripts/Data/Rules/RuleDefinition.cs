@@ -29,7 +29,13 @@ public abstract class RuleDefinition : AMG.Data
 
     public override string ToString()
     {
-        return this.Description;
+        if (MainManager.Instance == null)
+        {
+            return this.Description;
+        }
+
+        LocalizationManager localizationManager = MainManager.Instance.LocalizationManager;
+        return localizationManager.GetString(this.Description);
     }
 
     public virtual GameObject[] GetIllustrationPrefabs()
