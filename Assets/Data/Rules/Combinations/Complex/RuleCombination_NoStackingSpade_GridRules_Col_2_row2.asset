@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606253e6f802b6540b13b07f36ea65d6, type: 3}
+  m_Name: RuleCombination_NoStackingSpade_GridRules_Col_2_row2
+  m_EditorClassIdentifier: 
+  IllustrationPrefab: {fileID: 0}
+  Description: 
+  SubRules:
+  - {fileID: 11400000, guid: 49a9de218bfa69642991f042424092b9, type: 2}
+  - {fileID: 11400000, guid: 723fb9710d845f94b94682284e941379, type: 2}

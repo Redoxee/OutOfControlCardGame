@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 5319558945069081298, guid: c7bf7f233aba02049a6ace7fc5f51686,
     type: 3}
-  Description: Staking Clovers Prohibited
+  Description: '%Stacking_Clovers'
   topSigil: 11
   bottomSigils: 4

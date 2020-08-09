@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 2086568313857153556, guid: 1016b6a141a42234ea22da9c250d6fd4,
     type: 3}
-  Description: Staking Hearts Prohibited
+  Description: '%Stacking_Hearts'
   topSigil: 13
   bottomSigils: 2

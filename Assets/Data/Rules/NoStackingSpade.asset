@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 2372538624943109807, guid: 0621aabd96d4fc1498122ba362982223,
     type: 3}
-  Description: Staking Spades Prohibited
+  Description: '%Stacking_Spikes'
   topSigil: 7
   bottomSigils: 8

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 5142863008231252228, guid: ed710bba0a50a1944abf13388ebe527e,
     type: 3}
-  Description: Staking Diamonds Prohibited
+  Description: '%Stacking_Diamonds'
   topSigil: 14
   bottomSigils: 1

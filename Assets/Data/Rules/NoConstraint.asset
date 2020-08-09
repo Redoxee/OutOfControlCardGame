@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 673095977190927162, guid: ed3484f96200fdd489c1763423777fea,
     type: 3}
-  Description: No Constraint
+  Description: '%No_Constraint'
