@@ -62,7 +62,7 @@ public class RulesGenerator : MonoBehaviour
                 }
 
                 string ruleName = $"GridRules_Col_{x + 1}_row{y + 1}";
-                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", gridRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complex", gridRule, ruleName);
             }
         }
 
@@ -81,7 +81,7 @@ public class RulesGenerator : MonoBehaviour
                 slashColRule.AllowedCells[i + 6] = false;
 
                 string ruleName = $"slash_Col_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", slashColRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complex", slashColRule, ruleName);
             }
 
             {
@@ -98,7 +98,7 @@ public class RulesGenerator : MonoBehaviour
                 slashRowRule.AllowedCells[i * 3 + 2] = false;
 
                 string ruleName = $"slash_Row_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", slashRowRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complex", slashRowRule, ruleName);
             }
 
             {
@@ -115,7 +115,7 @@ public class RulesGenerator : MonoBehaviour
                 antislashColRule.AllowedCells[i + 6] = false;
                 
                 string ruleName = $"antislash_Col_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", antislashColRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complex", antislashColRule, ruleName);
             }
 
             { 
@@ -132,7 +132,7 @@ public class RulesGenerator : MonoBehaviour
                 antislashRowRule.AllowedCells[i * 3 + 2] = false;
 
                 string ruleName = $"antislash_Row_{i + 1}";
-                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complexe", antislashRowRule, ruleName);
+                RulesGenerator.CreateAssetsFromGridRule("GridRules/Complex", antislashRowRule, ruleName);
             }
         }
 
