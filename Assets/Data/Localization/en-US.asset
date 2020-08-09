@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f451d29ae6220940820cd752788d719, type: 3}
+  m_Name: en-US
+  m_EditorClassIdentifier: 
+  Language: English
+  serializedKey:
+  - '%GridRules_Row_1'
+  - '%GridRules_Col_1'
+  - '%GridRules_Row_2'
+  - '%GridRules_Col_2'
+  - '%GridRules_Row_3'
+  - '%GridRules_Col_3'
+  - '%GridRules_AntiSlash'
+  - '%GridRules_Slash'
+  - '%GridRules_Col_1_row1'
+  - '%GridRules_Col_1_row2'
+  - '%GridRules_Col_1_row3'
+  - '%GridRules_Col_2_row1'
+  - '%GridRules_Col_2_row2'
+  - '%GridRules_Col_2_row3'
+  - '%GridRules_Col_3_row1'
+  - '%GridRules_Col_3_row2'
+  - '%GridRules_Col_3_row3'
+  - '%slash_Col_1'
+  - '%slash_Row_1'
+  - '%antislash_Col_1'
+  - '%antislash_Row_1'
+  - '%slash_Col_2'
+  - '%slash_Row_2'
+  - '%antislash_Col_2'
+  - '%antislash_Row_2'
+  - '%slash_Col_3'
+  - '%slash_Row_3'
+  - '%antislash_Col_3'
+  - '%antislash_Row_3'
+  - '%Stacking_Clovers'
+  - '%Stacking_Diamonds'
+  - '%Stacking_Hearts'
+  - '%Stacking_Spikes'
+  serializedTranslation:
+  - Can't play in the top row
+  - Can't play in the left column
+  - Can't play in the middle row
+  - Can't play in the center column
+  - Can't play in the bottom row
+  - Can't play in the right column
+  - Can't play in \ the diagonal
+  - Can't play in / the diagonal
+  - Can't play in top row or left column
+  - Can't play in middle row or left column
+  - Can't play in bottom row or left column
+  - Can't play in top row or center column
+  - Can't play in middle row or center column
+  - Can't play in bottom row or center column
+  - Can't play in top row or right column
+  - Can't play in middle row or center column
+  - Can't play in bottom row or center column
+  - Can't play in the / diagonal or left column
+  - Can't play in the / diagonal or top row
+  - Can't play in the \ diagonal or left column
+  - Can't play in the \ diagonal or top row
+  - Can't play in the / diagonal or center column
+  - Can't play in the / diagonal or middle row
+  - Can't play in the \ diagonal or center column
+  - Can't play in the \ diagonal or middle row
+  - Can't play in the / diagonal or right column
+  - Can't play in the / diagonal or bottom row
+  - Can't play in the \ diagonal or right column
+  - Can't play in the \ diagonal or bottom row
+  - Can't stack clovers
+  - Can't stack diamonds
+  - Can't stack hearts
+  - Cant stack spikes

@@ -1,0 +1,34 @@
+Key	English
+%GridRules_Row_1	Can't play in the top row
+%GridRules_Col_1	Can't play in the left column
+%GridRules_Row_2	Can't play in the middle row
+%GridRules_Col_2	Can't play in the center column
+%GridRules_Row_3	Can't play in the bottom row
+%GridRules_Col_3	Can't play in the right column
+%GridRules_AntiSlash	Can't play in \ the diagonal
+%GridRules_Slash	Can't play in / the diagonal
+%GridRules_Col_1_row1	Can't play in top row or left column
+%GridRules_Col_1_row2	Can't play in middle row or left column
+%GridRules_Col_1_row3	Can't play in bottom row or left column
+%GridRules_Col_2_row1	Can't play in top row or center column
+%GridRules_Col_2_row2	Can't play in middle row or center column
+%GridRules_Col_2_row3	Can't play in bottom row or center column
+%GridRules_Col_3_row1	Can't play in top row or right column
+%GridRules_Col_3_row2	Can't play in middle row or center column
+%GridRules_Col_3_row3	Can't play in bottom row or center column
+%slash_Col_1	Can't play in the / diagonal or left column
+%slash_Row_1	Can't play in the / diagonal or top row
+%antislash_Col_1	Can't play in the \ diagonal or left column
+%antislash_Row_1	Can't play in the \ diagonal or top row
+%slash_Col_2	Can't play in the / diagonal or center column
+%slash_Row_2	Can't play in the / diagonal or middle row
+%antislash_Col_2	Can't play in the \ diagonal or center column
+%antislash_Row_2	Can't play in the \ diagonal or middle row
+%slash_Col_3	Can't play in the / diagonal or right column
+%slash_Row_3	Can't play in the / diagonal or bottom row
+%antislash_Col_3	Can't play in the \ diagonal or right column
+%antislash_Row_3	Can't play in the \ diagonal or bottom row
+%Stacking_Clovers	Can't stack clovers
+%Stacking_Diamonds	Can't stack diamonds
+%Stacking_Hearts	Can't stack hearts
+%Stacking_Spikes	Cant stack spikes

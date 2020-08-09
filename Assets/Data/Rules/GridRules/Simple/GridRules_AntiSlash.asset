@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 9099212593991565713, guid: 1c87619ff8f3f104b8c147b13f7991b7,
     type: 3}
-  Description: 
+  Description: '%GridRules_AntiSlash'
   AllowedCells: 000101010001010100

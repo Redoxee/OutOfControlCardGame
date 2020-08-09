@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 1580193338000165691, guid: 9f43bd006aa05bc46a932f487a153203,
     type: 3}
-  Description: 
+  Description: '%slash_Col_2'
   AllowedCells: 010000010001000001

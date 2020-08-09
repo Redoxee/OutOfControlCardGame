@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IllustrationPrefab: {fileID: 974166788839354797, guid: 857427818899321469d369cc6b7720e2,
     type: 3}
-  Description: 
+  Description: '%GridRules_Col_1'
   AllowedCells: 000101000101000101
