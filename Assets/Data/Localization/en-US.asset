@@ -47,6 +47,7 @@ MonoBehaviour:
   - '%Stacking_Diamonds'
   - '%Stacking_Hearts'
   - '%Stacking_Spikes'
+  - '%No_Constraint'
   serializedTranslation:
   - Can't play in the top row
   - Can't play in the left column
@@ -81,3 +82,4 @@ MonoBehaviour:
   - Can't stack diamonds
   - Can't stack hearts
   - Cant stack spikes
+  - No constraint
