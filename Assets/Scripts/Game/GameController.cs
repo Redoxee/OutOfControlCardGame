@@ -326,5 +326,60 @@ public partial class GameController : MonoBehaviour
         this.scoreLabel.text = $"Score : {this.score}";
         this.lifeHolder.SetLifeCount(this.lifeCount);
     }
+
+    private void GivePoints(int playedIndex, Card playedCard)
+    {
+        int pointGained = 0;
+        if (playedIndex > GameController.GridSize)
+        {
+            int topIndex = playedIndex - GameController.GridSize;
+            Card topCard = this.playSlots[topIndex].Card;
+            if (topCard != null && topCard.Data.Sigil == playedCard.Data.Sigil)
+            {
+                pointGained += topCard.Data.NumberValue;
+                this.playSlots[topIndex].FlashGreen();
+            }
+        }
+
+        if (playedIndex < GameController.GridSize * (GameController.GridSize - 1))
+        {
+            int bottomIndex = playedIndex + GameController.GridSize;
+            Card bottomCard = this.playSlots[bottomIndex].Card;
+            if (bottomCard != null && bottomCard.Data.Sigil == playedCard.Data.Sigil)
+            {
+                pointGained += bottomCard.Data.NumberValue;
+                this.playSlots[playedIndex + GameController.GridSize].FlashGreen();
+            }
+        }
+
+        if (playedIndex % GameController.GridSize > 0)
+        {
+            int leftIndex = playedIndex - 1;
+            Card leftCard = this.playSlots[leftIndex].Card;
+            if (leftCard != null && leftCard.Data.Sigil == playedCard.Data.Sigil)
+            {
+                pointGained += leftCard.Data.NumberValue;
+                this.playSlots[leftIndex].FlashGreen();
+            }
+        }
+
+        if (playedIndex % GameController.GridSize < (GameController.GridSize - 1))
+        {
+            int rightIndex = playedIndex + 1;
+            Card rightCard = this.playSlots[rightIndex].Card;
+            if (rightCard != null && rightCard.Data.Sigil == playedCard.Data.Sigil)
+            {
+                pointGained += rightCard.Data.NumberValue;
+                this.playSlots[rightIndex].FlashGreen();
+            }
+        }
+
+        if (pointGained > 0)
+        {
+            pointGained += playedCard.Data.NumberValue;
+            this.playSlots[playedIndex].FlashGreen();
+        }
+
+        this.score += pointGained;
     }
 }

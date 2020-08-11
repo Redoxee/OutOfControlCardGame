@@ -267,7 +267,6 @@ public partial class GameController
             }
             else
             {
-                this.score++;
                 this.TransferOneCombinedRule();
             }
         }
@@ -275,6 +274,10 @@ public partial class GameController
         if (numberOfFailures > 0)
         {
             this.lifeCount--;
+        }
+        else
+        {
+            this.GivePoints(slotIndex, this.nextPlayedCard);
         }
 
         if (this.playRuleSlots[this.playRuleSlots.Length - 1].Rule != null)
@@ -293,7 +296,7 @@ public partial class GameController
             this.playRuleSlots[index].Rule.transform.SetParent(this.playRuleSlots[index].transform);
         }
 
-        this.RefreshGameLabels();
+        this.RefreshPlayerStatus();
         this.currentState = State.TransitionToPlacement;
         StartCoroutine(this.PlayCardRoutine(slotIndex, rulePassingStates));
     }
@@ -365,7 +368,7 @@ public partial class GameController
         }
 
         this.HandTransform.transform.position = handEndPosition;
-        this.RefreshGameLabels();
+        this.RefreshPlayerStatus();
 
         if (this.playSlots[cardSlotindex].Card != null)
         {
