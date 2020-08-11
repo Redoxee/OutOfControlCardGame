@@ -52,7 +52,7 @@ public partial class GameController : MonoBehaviour
     [SerializeField]
     private TextMeshPro scoreLabel = null;
     [SerializeField]
-    private TextMeshPro lifeLabel = null;
+    private LifeHolder lifeHolder = null;
 
     [SerializeField]
     private Transform IntermediateCardAnchor = null;
@@ -145,7 +145,7 @@ public partial class GameController : MonoBehaviour
             this.playRuleSlots[index].OnHover += OnPlayRuleHover;
         }
 
-        this.RefreshGameLabels();
+        this.RefreshPlayerStatus();
 
         this.handRuleSlots[0].OnHover += (BorderComponent component, bool isHovered) =>
         {
@@ -321,9 +321,10 @@ public partial class GameController : MonoBehaviour
         }
     }
 
-    private void RefreshGameLabels()
+    private void RefreshPlayerStatus()
     {
         this.scoreLabel.text = $"Score : {this.score}";
-        this.lifeLabel.text = $"Lives : {this.lifeCount}";
+        this.lifeHolder.SetLifeCount(this.lifeCount);
+    }
     }
 }
