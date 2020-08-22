@@ -15,4 +15,4 @@ MonoBehaviour:
   IllustrationPrefab: {fileID: 3869449131499165286, guid: dd45e14f864d6f44b9d754f2afbf7c71,
     type: 3}
   Description: '%GridRules_Col_1_row3'
-  AllowedCells: 010101010101000101
+  AllowedCells: 000101000101000000

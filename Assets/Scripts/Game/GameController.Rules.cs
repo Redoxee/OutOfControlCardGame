@@ -15,7 +15,29 @@ public partial class GameController
         {
             List<RuleDefinition> wave = new List<RuleDefinition>();
             wave.AddRange(wavesDefintion[waveIndex].RuleDefintions);
+            ShuffleList(wave);
             this.wavesRules.Add(wave);
+        }
+    }
+
+    private static void ShuffleList<T>(List<T> list)
+    {
+        if (list == null)
+        {
+            return;
+        }
+
+        for (int index = 0; index < list.Count; ++index)
+        {
+            int other = UnityEngine.Random.Range(index, list.Count - 1);
+            if (other == index)
+            {
+                continue;
+            }
+
+            T temp = list[index];
+            list[index] = list[other];
+            list[other] = temp;
         }
     }
 

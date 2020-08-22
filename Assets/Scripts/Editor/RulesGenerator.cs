@@ -57,7 +57,7 @@ public class RulesGenerator : MonoBehaviour
                 {
                     for (int j = 0; j < 3; ++j)
                     {
-                        gridRule.AllowedCells[i + j * 3] = (i != x || j != y);
+                        gridRule.AllowedCells[i + j * 3] = !(i == x || j == y);
                     }
                 }
 
